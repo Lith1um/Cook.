@@ -1,3 +1,4 @@
+import 'package:cook/widgets/recipe-list.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -11,9 +12,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: Center(
-          child: Text('Cook.')
-        ),
+        body: RecipeList(),
       ),
     );
   }

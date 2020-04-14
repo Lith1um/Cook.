@@ -28,6 +28,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  cloud_firestore: ^0.13.4+2
+  firebase_storage: ^3.1.5
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

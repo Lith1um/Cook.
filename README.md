@@ -10,6 +10,7 @@ A community driven recipe book for sharing recipes and helping people to expand 
   - cook time
   - instructions
   - photo
+  - cuisine
   - reviews?
 
 - build shopping list by selecting multiple recipes

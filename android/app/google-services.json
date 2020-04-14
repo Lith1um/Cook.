@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "784836126763",
+    "firebase_url": "https://cook-c911a.firebaseio.com",
+    "project_id": "cook-c911a",
+    "storage_bucket": "cook-c911a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784836126763:android:5e6bef8b13313222c3e26e",
+        "android_client_info": {
+          "package_name": "com.example.cook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784836126763-ri6k5eee89gghjdb50comc3eq3i0aq67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4wPbwnzHhg0lbsCjPeA8Kpwjdm5RL4Pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784836126763-ri6k5eee89gghjdb50comc3eq3i0aq67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
