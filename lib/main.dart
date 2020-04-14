@@ -1,5 +1,8 @@
-import 'package:cook/widgets/recipe-list.dart';
+// Libs
 import 'package:flutter/material.dart';
+
+// Pages
+import 'package:cook/pages/home-page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: RecipeList(),
-      ),
+      home: HomePage()
     );
   }
 }
