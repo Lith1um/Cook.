@@ -16,13 +16,13 @@ class RecipeList extends StatelessWidget {
         ),
         title: Text(document['name']),
         subtitle: Text('${document['prepTime']}mins prep, ${document['cookTime']}mins cook'),
-        trailing: Text(document['views'].toString()),
+        trailing: Text((document['views'] ?? 0).toString()),
       ),
       onTap: () {
         Firestore.instance.runTransaction((transaction) async {
           DocumentSnapshot freshSnap = await transaction.get(document.reference);
           await transaction.update(freshSnap.reference, {
-            'views': freshSnap['views'] + 1
+            'views': (freshSnap['views'] ?? 0) + 1
           });
         });
       },
@@ -36,7 +36,6 @@ class RecipeList extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return CircularProgressIndicator();
         return ListView.builder(
-          itemExtent: 80.0,
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => _buildListItem(snapshot.data.documents[index]),
         );
