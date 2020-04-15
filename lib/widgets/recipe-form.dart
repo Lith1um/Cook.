@@ -1,13 +1,15 @@
 // Libs
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Services
 import 'package:cook/services/recipe-upload.dart';
 import 'package:cook/services/recipe-picture-upload.dart';
+
+// Widgets
+import 'package:cook/widgets/inputs/input-time.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
@@ -20,6 +22,7 @@ class RecipeForm extends StatefulWidget {
 class _RecipeFormState extends State<RecipeForm> {
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
+  final _prepTimeController = TextEditingController(text: '0');
 
   File _imageFile;
 
@@ -151,6 +154,10 @@ class _RecipeFormState extends State<RecipeForm> {
                       }
                       return null;
                     },
+                  ),
+                  InputTime(
+                    controller: _prepTimeController,
+                    label: 'Preparation time (mins)',
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),

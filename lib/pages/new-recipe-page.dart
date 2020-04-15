@@ -16,7 +16,9 @@ class NewRecipePage extends StatelessWidget {
           ),
         ),
       ),
-      body: RecipeForm(),
+      body: SafeArea(
+        child: RecipeForm(),
+      )
     );
   }
 }
