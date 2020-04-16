@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),
         ),
-
       ),
       body: RecipeList(),
       floatingActionButton: FloatingActionButton(
