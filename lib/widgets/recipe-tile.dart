@@ -1,5 +1,7 @@
 // Libs
 import 'package:cook/widgets/ink-wrapper.dart';
+import 'package:cook/widgets/reviews-stars.dart';
+import 'package:cook/widgets/tags.dart';
 import 'package:flutter/material.dart';
 
 // Models
@@ -7,10 +9,10 @@ import 'package:cook/models/recipe.dart';
 
 class RecipeTile extends StatelessWidget {
   final Recipe recipe;
+  final double borderRadiusValue = 10.0;
 
   RecipeTile({@required this.recipe});
 
-  double borderRadiusValue = 10.0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class RecipeTile extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey,
-            offset: Offset(0.0, 1.0), //(x,y)
+            offset: Offset(0.0, 2.0),
             blurRadius: 4.0,
           ),
         ],
@@ -48,13 +50,34 @@ class RecipeTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    recipe.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0
-                    ),
-                  )
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          recipe.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0
+                          ),
+                        ),
+                      ),
+                      ReviewStars(
+                        reviews: recipe.reviews,
+                        score: recipe.reviewScore
+                      )
+                    ],
+                  ),
+                  if (recipe.prepTime != null) ...[
+                    SizedBox(height: 2.0),
+                    Text('Preparation time: ${recipe.prepTime} mins'),
+                  ],
+                  if (recipe.cookTime != null) ...[
+                    SizedBox(height: 2.0),
+                    Text('Cooking time: ${recipe.cookTime} mins'),
+                  ],
+                  if (recipe.cuisines != null)
+                    SizedBox(height: 5.0),
+                    Tags(tagsText: recipe.cuisines)
                 ],
               ),
             )

@@ -1,6 +1,9 @@
 // Libs
 import 'package:flutter/material.dart';
 
+// Widgets
+import 'package:cook/widgets/tags.dart';
+
 class InputTags extends StatefulWidget {
   final String label;
   final Function onValueChanged;
@@ -13,30 +16,11 @@ class InputTags extends StatefulWidget {
 
 class _InputTagsState extends State<InputTags> {
   final _controller = TextEditingController();
-  List<String> _tags = [];
+  String _tagsText = '';
 
   void onTagFieldChanged(String value) {
-    setState(() {
-      _tags = value.split(',').where((tag) => tag.replaceAll(' ', '') != '').toList();
-    });
-    widget.onValueChanged(_tags.join(','));
-  }
-
-  Widget getTag(String text) {
-    return Container(
-      margin: EdgeInsets.only(right: 8.0, bottom: 5.0),
-      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-      decoration: BoxDecoration(
-        borderRadius: new BorderRadius.circular(20.0),
-        color: Colors.blue
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.white
-        ),
-      )
-    );
+    _tagsText = value;
+    widget.onValueChanged(value);
   }
 
   @override
@@ -46,12 +30,7 @@ class _InputTagsState extends State<InputTags> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Wrap(
-            children: [
-              for (String value in _tags)
-                getTag(value)
-            ],
-          ),
+          Tags(tagsText: _tagsText),
           TextFormField(
             controller: _controller,
             decoration: InputDecoration(

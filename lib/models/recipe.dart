@@ -4,8 +4,18 @@ class Recipe {
   final int prepTime;
   final int cookTime;
   final String cuisines;
+  final int reviews;
+  final double reviewScore;
 
-  Recipe({this.name, this.imageUrl, this.prepTime, this.cookTime, this.cuisines});
+  Recipe({
+    this.name,
+    this.imageUrl, 
+    this.prepTime,
+    this.cookTime,
+    this.cuisines,
+    this.reviews = 0,
+    this.reviewScore = 0.0
+  });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
@@ -13,7 +23,9 @@ class Recipe {
       imageUrl: json['imageUrl'],
       prepTime: json['prepTime'],
       cookTime: json['cookTime'],
-      cuisines: json['cuisines']
+      cuisines: json['cuisines'],
+      reviews: json['reviews'],
+      reviewScore: json['reviewScore']
     );
   }
 
@@ -22,6 +34,8 @@ class Recipe {
     'imageUrl' : imageUrl,
     'prepTime' : prepTime,
     'cookTime' : cookTime,
-    'cuisines' : cuisines
+    'cuisines' : cuisines,
+    'reviews' : reviews,
+    'reviewScore' : reviewScore
   };
 }
