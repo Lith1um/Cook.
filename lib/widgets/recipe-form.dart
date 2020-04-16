@@ -1,5 +1,6 @@
 // Libs
 import 'dart:io';
+import 'package:cook/widgets/inputs/input-tags.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,10 +23,14 @@ class RecipeForm extends StatefulWidget {
 class _RecipeFormState extends State<RecipeForm> {
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
-  final _prepTimeController = TextEditingController(text: '0');
 
   File _imageFile;
+  bool _showImageError = false;
+  int _prepTime;
+  int _cookTime;
+  String _cuisines;
 
+  // TODO: move to separate widget
   Future<void> _pickImage(ImageSource source) async {
     File _selected = await ImagePicker.pickImage(source: source);
 
@@ -43,19 +48,58 @@ class _RecipeFormState extends State<RecipeForm> {
 
       setState(() {
         _imageFile = cropped;
+        _showImageError = false;
       });
     }
   }
 
   void _clear() {
-    setState(() => _imageFile = null);
+    setState(() {
+      _imageFile = null;
+    });
+  }
+
+  void setPrepTime(int timeInMinutes) {
+    setState(() {
+      _prepTime = timeInMinutes;
+    });
+  }
+
+  void setCookTime(int timeInMinutes) {
+    setState(() {
+      _cookTime = timeInMinutes;
+    });
+  }
+
+  void setCuisines(String tags) {
+    setState(() {
+      _cuisines = tags;
+    });
+  }
+
+  bool validateForm() {
+    bool valid = true;
+
+    if (_imageFile == null) {
+      setState(() {
+        _showImageError = true;
+      });
+      valid = false;
+    }
+    return _formKey.currentState.validate() && valid;
   }
 
   void _uploadRecipe(BuildContext context) async {
     String imageUrl = await uploadRecipePhoto(_imageFile);
     String recipeName = _recipeNameController.text;
 
-    Recipe recipe = Recipe(name: recipeName, imageUrl: imageUrl);
+    Recipe recipe = Recipe(
+      name: recipeName,
+      imageUrl: imageUrl,
+      prepTime: _prepTime,
+      cookTime: _cookTime,
+      cuisines: _cuisines
+    );
     await addNewRecipe(recipe);
 
     Navigator.of(context).pop();
@@ -71,8 +115,13 @@ class _RecipeFormState extends State<RecipeForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Pick a picture for your recipe:'),
-                SizedBox(height: 10.0),
+                Text(
+                  'Pick a picture for your recipe:',
+                  style: TextStyle(
+                    fontSize: 16.0
+                  ),
+                ),
+                SizedBox(height: 20.0),
                 if (_imageFile != null)
                   Row(
                     children: <Widget>[
@@ -100,7 +149,7 @@ class _RecipeFormState extends State<RecipeForm> {
                       )
                     ]
                   ),
-                if (_imageFile == null)
+                if (_imageFile == null) ...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -131,7 +180,20 @@ class _RecipeFormState extends State<RecipeForm> {
                         onPressed: () => _pickImage(ImageSource.gallery),
                       ),
                     ],
-                  )
+                  ),
+                  if (_showImageError) ...[
+                    SizedBox(height: 10.0),
+                    Center(
+                      child: Text(
+                        'Please select an image',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12.0
+                        )
+                      )
+                    )
+                  ]
+                ]
               ]
             )
           ),
@@ -142,38 +204,49 @@ class _RecipeFormState extends State<RecipeForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  TextFormField(
-                    controller: _recipeNameController,
-                    decoration: InputDecoration(
-                      labelText: 'What is the name of your recipe?'
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      controller: _recipeNameController,
+                      decoration: InputDecoration(
+                        labelText: 'What is the name of your recipe?'
+                      ),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a recipe name';
+                        }
+                        return null;
+                      },
                     ),
-                    // The validator receives the text that the user has entered.
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter a recipe name';
-                      }
-                      return null;
-                    },
                   ),
                   InputTime(
-                    controller: _prepTimeController,
-                    label: 'Preparation time (mins)',
+                    label: 'Preparation time',
+                    onValueChanged: setPrepTime,
+                  ),
+                  InputTime(
+                    label: 'Cooking time',
+                    onValueChanged: setCookTime,
+                  ),
+                  InputTags(
+                    label: 'Cuisines',
+                    onValueChanged: setCuisines,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          // close keyboard if validated
-                          FocusScope.of(context).unfocus();
-                          
-                          // form is valid so start upload
-                          _uploadRecipe(context);
-                        }
-                      },
-                      child: Text('Submit'),
+                    child: Center(
+                      child: RaisedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise
+                          if (validateForm()) {
+                            // close keyboard if validated
+                            FocusScope.of(context).unfocus();
+                            // form is valid so start upload
+                            _uploadRecipe(context);
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
                     ),
                   ),
                 ]

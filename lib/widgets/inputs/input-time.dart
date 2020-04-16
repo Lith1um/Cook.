@@ -1,5 +1,6 @@
-import 'package:cook/widgets/inputs/input-number.dart';
+// Libs
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TimeOption {
   final String type;
@@ -16,16 +17,16 @@ class TimeOption {
 }
 
 class InputTime extends StatefulWidget {
-  final TextEditingController controller;
   final String label;
+  final Function onValueChanged;
   final bool isRequired;
   final String requiredMessage;
 
   const InputTime({
-    @required this.controller,
     @required this.label,
+    @required this.onValueChanged,
     this.isRequired = false,
-    this.requiredMessage = 'This field is required'
+    this.requiredMessage = 'This field is required',
   });
 
   @override
@@ -33,9 +34,11 @@ class InputTime extends StatefulWidget {
 }
 
 class _InputTimeState extends State<InputTime> {
+  final _controller = TextEditingController();
   List<TimeOption> _options = TimeOption.getTimeOptions();
   List<DropdownMenuItem<TimeOption>> _dropdownMenuItems;
   TimeOption _selectedOption;
+  int _timeInMinutes = 0;
 
   @override
   void initState() {
@@ -58,28 +61,53 @@ class _InputTimeState extends State<InputTime> {
     return items;
   }
 
-  void onChangeDropdownItem(TimeOption option) {
+  void onDropdownItemChanged(TimeOption option) {
     setState(() {
       _selectedOption = option;
     });
+    onValueChanged(_controller.text);
+  }
+
+  void onValueChanged(String value) {
+    setState(() {
+      _timeInMinutes = value != '' ?
+        int.parse(value) * _selectedOption.multiplier : null;
+    });
+    widget.onValueChanged(_timeInMinutes);
   }
   
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: InputNumber(
-            inputController: widget.controller,
-            label: widget.label,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextFormField(
+              controller: _controller,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly
+              ],
+              decoration: InputDecoration(
+                labelText: widget.label
+              ),
+              validator: (value) {
+                if (widget.isRequired && value.isEmpty) {
+                  return widget.requiredMessage;
+                }
+                return null;
+              },
+              onChanged: onValueChanged,
+            )
           ),
-        ),
-        DropdownButton(
-          value: _selectedOption,
-          items: _dropdownMenuItems,
-          onChanged: onChangeDropdownItem
-        )
-      ],
+          DropdownButton(
+            value: _selectedOption,
+            items: _dropdownMenuItems,
+            onChanged: onDropdownItemChanged
+          )
+        ],
+      ),
     );
   }
 }
