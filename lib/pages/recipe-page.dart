@@ -1,4 +1,5 @@
 // Libs
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cook/services/recipe-delete.dart';
 import 'package:cook/widgets/reviews-stars.dart';
@@ -113,8 +114,8 @@ class _RecipePageState extends State<RecipePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              widget.recipe.imageUrl,
+            CachedNetworkImage(
+              imageUrl: widget.recipe.imageUrl,
               fit: BoxFit.fitWidth
             ),
             Row(
