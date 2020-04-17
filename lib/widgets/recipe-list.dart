@@ -14,7 +14,8 @@ class RecipeList extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => RecipeTile(
-            recipe: Recipe.fromJson(snapshot.data.documents[index].data)
+            recipe: Recipe.fromJson(snapshot.data.documents[index].data),
+            documentReference: snapshot.data.documents[index].reference
           ),
         );
       },

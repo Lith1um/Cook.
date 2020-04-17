@@ -208,6 +208,7 @@ class _RecipeFormState extends State<RecipeForm> {
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: TextFormField(
                       controller: _recipeNameController,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         labelText: 'What is the name of your recipe?'
                       ),

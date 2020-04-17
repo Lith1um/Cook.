@@ -4,18 +4,25 @@ import 'package:flutter/material.dart';
 class ReviewStars extends StatelessWidget {
   final int reviews;
   final double score;
+  final double size;
 
-  const ReviewStars({@required this.reviews, @required this.score});
+  const ReviewStars({
+    @required this.reviews,
+    @required this.score,
+    this.size = 16.0
+  });
 
   List<Widget> getStars() {
     int rounded = score.round();
+
     List<Widget> stars = [];
 
     for (int i = 0; i < 5; i++) {
       stars.add(
         Icon(
           Icons.star,
-          color: i+1 <= rounded ? Colors.amber : Colors.grey
+          color: i+1 <= rounded ? Colors.amber : Colors.grey,
+          size: size + 4.0,
         ),
       );
     }
@@ -28,9 +35,10 @@ class ReviewStars extends StatelessWidget {
       children: [
         ...getStars(),
         Text(
-          '($reviews)',
+          ' ($reviews)',
           style: TextStyle(
-            color: Colors.grey
+            color: Colors.grey,
+            fontSize: size
           ),
         )
       ]

@@ -33,6 +33,7 @@ class _InputTagsState extends State<InputTags> {
           Tags(tagsText: _tagsText),
           TextFormField(
             controller: _controller,
+            textCapitalization: TextCapitalization.words,
             decoration: InputDecoration(
               labelText: widget.label,
               hintText: 'use \',\' to separate tags'
