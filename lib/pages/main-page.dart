@@ -2,6 +2,10 @@ import 'package:cook/widgets/login-form.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
+  final Function callback;
+
+  const MainPage({this.callback});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -35,7 +39,7 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               SizedBox(height: 20.0),
-              LoginForm()
+              LoginForm(callback: widget.callback)
             ]
           )
         )

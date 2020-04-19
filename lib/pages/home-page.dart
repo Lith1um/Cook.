@@ -6,6 +6,10 @@ import 'package:cook/widgets/recipe-list.dart';
 import 'package:cook/pages/new-recipe-page.dart';
 
 class HomePage extends StatelessWidget {
+  final Function callback;
+
+  const HomePage({this.callback});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +23,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.exit_to_app),
-            onPressed: () => Navigator.pushNamed(context, '/'),
+            onPressed: () => callback(false),
           )
         ],
       ),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
+  final Function callback;
+
+  const LoginForm({this.callback});
+
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -42,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             onPressed: () {
               if (_formKey.currentState.validate()) {
-                Navigator.pushNamed(context, '/home');
+                widget.callback(true);
               }
             }
           )
