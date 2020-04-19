@@ -16,6 +16,12 @@ class HomePage extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () => Navigator.pushNamed(context, '/'),
+          )
+        ],
       ),
       body: RecipeList(),
       floatingActionButton: FloatingActionButton(

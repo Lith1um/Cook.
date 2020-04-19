@@ -66,6 +66,7 @@ class _RecipePageState extends State<RecipePage> {
                 ),
               ),
               onPressed: () async {
+                // TODO: develop way to delete image too
                 await deleteRecipe(widget.documentReference);
                 Navigator.of(context).popUntil((route) => route.isFirst);
               }

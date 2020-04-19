@@ -17,4 +17,13 @@ A community driven recipe book for sharing recipes and helping people to expand 
   - ticklist to confirm items bought
 
 - offline content?
-- users
+
+- User profiles
+
+- Global state management
+
+- Better routing
+
+- Bottom bar navigation 
+
+- stepped form for uploading recipes

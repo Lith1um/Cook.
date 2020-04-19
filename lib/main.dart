@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Pages
+import 'package:cook/pages/main-page.dart';
 import 'package:cook/pages/home-page.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage()
+      routes: {
+        '/': (_) => MainPage(),
+        '/home': (_) => HomePage()
+      }
     );
   }
 }
