@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 // Services
 import 'package:cook/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
 
@@ -78,7 +78,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 10.0),
                   FlatButton(
                     child: Text(
-                      'Login',
+                      'Sign up',
                       style: TextStyle(
                         color: Colors.blueGrey[700]
                       ),
