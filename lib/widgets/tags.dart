@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class Tags extends StatelessWidget {
   final String tagsText;
+  final double size;
 
-  Tags({@required this.tagsText});
+  Tags({@required this.tagsText, this.size = 14.0});
 
   List<Widget> getTags() {
     List<String> tagTextList = tagsText.split(',')
@@ -24,7 +25,8 @@ class Tags extends StatelessWidget {
           child: Text(
             tag,
             style: TextStyle(
-              color: Colors.white
+              color: Colors.white,
+              fontSize: size
             ),
           )
         )

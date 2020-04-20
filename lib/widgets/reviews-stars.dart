@@ -9,7 +9,7 @@ class ReviewStars extends StatelessWidget {
   const ReviewStars({
     @required this.reviews,
     @required this.score,
-    this.size = 16.0
+    this.size = 12.0
   });
 
   List<Widget> getStars() {

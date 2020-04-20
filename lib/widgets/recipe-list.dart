@@ -11,12 +11,13 @@ class RecipeList extends StatelessWidget {
       stream: Firestore.instance.collection('recipes').orderBy('name').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return CircularProgressIndicator();
-        return ListView.builder(
+        return ListView.separated(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => RecipeTile(
             recipe: Recipe.fromJson(snapshot.data.documents[index].data),
             documentReference: snapshot.data.documents[index].reference
           ),
+          separatorBuilder: (context, index) => Divider(thickness: 1.0,),
         );
       },
     );

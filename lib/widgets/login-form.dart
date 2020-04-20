@@ -23,7 +23,6 @@ class _LoginFormState extends State<LoginForm> {
         children: <Widget>[
           TextFormField(
             controller: _usernameController,
-            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               labelText: 'Username'
             ),
@@ -31,7 +30,6 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: 10.0),
           TextFormField(
             controller: _passwordController,
-            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               labelText: 'Password',
             ),

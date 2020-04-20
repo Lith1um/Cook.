@@ -24,65 +24,49 @@ class RecipeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(borderRadiusValue)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0.0, 2.0),
-            blurRadius: 4.0,
-          ),
-        ],
-      ),
-      child: InkWrapper(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RecipePage(
-              recipe: recipe,
-              documentReference: documentReference
-            ))
-          );
-        },
-        borderRadius: BorderRadius.all(Radius.circular(borderRadiusValue)),
-        child: Column(
+    return InkWrapper(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RecipePage(
+            recipe: recipe,
+            documentReference: documentReference
+          ))
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(borderRadiusValue),
-                topRight: Radius.circular(borderRadiusValue)
-              ),
-              child: CachedNetworkImage(
-                imageUrl: recipe.imageUrl,
-                fit: BoxFit.fitWidth
-              ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 100.0,
+                  width: 100.0,
+                  child: CachedNetworkImage(
+                    imageUrl: recipe.imageUrl,
+                    fit: BoxFit.fitWidth
+                  ),
+                ),
+                SizedBox(height: 4.0),
+                ReviewStars(
+                  reviews: recipe.reviews,
+                  score: recipe.reviewScore
+                )
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
+            SizedBox(width: 10.0),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          recipe.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0
-                          ),
-                        ),
-                      ),
-                      ReviewStars(
-                        reviews: recipe.reviews,
-                        score: recipe.reviewScore
-                      )
-                    ],
+                children: [
+                  Text(
+                    recipe.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0
+                    ),
                   ),
                   if (recipe.prepTime != null) ...[
                     SizedBox(height: 2.0),
@@ -94,12 +78,15 @@ class RecipeTile extends StatelessWidget {
                   ],
                   if (recipe.cuisines != null) ...[
                     SizedBox(height: 5.0),
-                    Tags(tagsText: recipe.cuisines)
+                    Tags(
+                      tagsText: recipe.cuisines,
+                      size: 12.0,
+                    )
                   ]
-                ],
-              ),
+                ]
+              )
             )
-          ]
+          ],
         )
       )
     );
