@@ -1,9 +1,13 @@
 // Libs
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cook/services/recipe-delete.dart';
-import 'package:cook/widgets/reviews-stars.dart';
 import 'package:flutter/material.dart';
+
+// Services
+import 'package:cook/services/recipe-delete.dart';
+
+// Widgets
+import 'package:cook/widgets/reviews-stars.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';

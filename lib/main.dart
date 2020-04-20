@@ -1,9 +1,15 @@
 // Libs
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-// Pages
-import 'package:cook/pages/main-page.dart';
-import 'package:cook/pages/home-page.dart';
+// Screens
+import 'package:cook/screens/wrapper.dart';
+
+// Services
+import 'package:cook/services/auth.dart';
+
+// Models
+import 'package:cook/models/user.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,22 +19,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _loggedIn = false;
-
-  void toggleLogin(bool loggedIn) {
-    setState(() => _loggedIn = loggedIn);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cook.',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        title: 'Cook.',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Wrapper(),
       ),
-      routes: {
-        '/': (_) => _loggedIn ? HomePage(callback: toggleLogin,) : MainPage(callback: toggleLogin,)
-      }
     );
   }
 }
