@@ -33,7 +33,7 @@ class MemberFeature extends StatelessWidget {
                   'This feature is disabled',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.grey[600],
+                    color: Colors.blueGrey[700],
                     fontSize: 18.0
                   )
                 )
@@ -45,7 +45,7 @@ class MemberFeature extends StatelessWidget {
                   'Please log in or sign up for an account on the \'profile\' tab to acsess this feature',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    color: Colors.grey[600]
+                    color: Colors.blueGrey[700]
                   )
                 ),
               )

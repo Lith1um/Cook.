@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
           barBackgroundColor: Colors.white,
           selectedItemBackgroundColor: Colors.blue,
           selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.blue,
+          selectedItemLabelColor: Colors.blue[600],
           showSelectedItemShadow: true
         ),
         selectedIndex: _tabIndex,

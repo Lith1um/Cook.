@@ -13,7 +13,7 @@ class Authenticate extends StatefulWidget {
 class _AuthenticateState extends State<Authenticate> with TickerProviderStateMixin {
 
   static List<Widget> _tabs = <Widget>[
-    Text('Login'),
+    Text('Log in'),
     Text('Sign up'),
   ];
   static List<Widget> _tabsContent = <Widget>[
@@ -87,7 +87,10 @@ class _AuthenticateState extends State<Authenticate> with TickerProviderStateMix
               padding: EdgeInsets.symmetric(horizontal: 60.0),
               child: TabBar(
                 labelPadding: EdgeInsets.all(15.0),
-                labelStyle: TextStyle(fontSize: 16.0),
+                labelStyle: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
                 controller: _tabController,
                 indicatorColor: Colors.blue,
                 labelColor: Colors.blue,
