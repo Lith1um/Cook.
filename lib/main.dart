@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Screens
-import 'package:cook/screens/wrapper.dart';
+import 'package:cook/screens/home/home.dart';
 
 // Services
 import 'package:cook/services/auth.dart';
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Wrapper(),
+        home: Home(),
       ),
     );
   }

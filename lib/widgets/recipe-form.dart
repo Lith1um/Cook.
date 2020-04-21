@@ -98,7 +98,8 @@ class _RecipeFormState extends State<RecipeForm> {
       imageUrl: imageUrl,
       prepTime: _prepTime,
       cookTime: _cookTime,
-      cuisines: _cuisines
+      cuisines: _cuisines,
+      timeAdded: DateTime.now().millisecondsSinceEpoch
     );
     await addNewRecipe(recipe);
 
@@ -107,153 +108,155 @@ class _RecipeFormState extends State<RecipeForm> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Pick a picture for your recipe:',
-                  style: TextStyle(
-                    fontSize: 16.0
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                if (_imageFile != null)
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 150.0,
-                        child: Image.file(_imageFile, fit: BoxFit.fitWidth),
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: FlatButton(
-                            textColor: Colors.red,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.delete),
-                                  Text('Delete')
-                                ],
-                              ),
-                            ),
-                            onPressed: () => _clear(),
-                          )
-                        ),
-                      )
-                    ]
-                  ),
-                if (_imageFile == null) ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      FlatButton(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.photo_camera),
-                              Text('Camera')
-                            ],
-                          ),
-                        ),
-                        onPressed: () => _pickImage(ImageSource.camera),
-                      ),
-                      FlatButton(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.photo_library),
-                              Text('Gallery')
-                            ],
-                          ),
-                        ),
-                        onPressed: () => _pickImage(ImageSource.gallery),
-                      ),
-                    ],
-                  ),
-                  if (_showImageError) ...[
-                    SizedBox(height: 10.0),
-                    Center(
-                      child: Text(
-                        'Please select an image',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 12.0
-                        )
-                      )
-                    )
-                  ]
-                ]
-              ]
-            )
-          ),
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: TextFormField(
-                      controller: _recipeNameController,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                        labelText: 'What is the name of your recipe?'
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a recipe name';
-                        }
-                        return null;
-                      },
+                  Text(
+                    'Pick a picture for your recipe:',
+                    style: TextStyle(
+                      fontSize: 16.0
                     ),
                   ),
-                  InputTime(
-                    label: 'Preparation time',
-                    onValueChanged: setPrepTime,
-                  ),
-                  InputTime(
-                    label: 'Cooking time',
-                    onValueChanged: setCookTime,
-                  ),
-                  InputTags(
-                    label: 'Cuisines',
-                    onValueChanged: setCuisines,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Center(
-                      child: RaisedButton(
-                        onPressed: () {
-                          // Validate returns true if the form is valid, or false otherwise
-                          if (validateForm()) {
-                            // close keyboard if validated
-                            FocusScope.of(context).unfocus();
-                            // form is valid so start upload
-                            _uploadRecipe(context);
-                          }
-                        },
-                        child: Text('Submit'),
-                      ),
+                  SizedBox(height: 20.0),
+                  if (_imageFile != null)
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          width: 150.0,
+                          child: Image.file(_imageFile, fit: BoxFit.fitWidth),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: FlatButton(
+                              textColor: Colors.red,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.delete),
+                                    Text('Delete')
+                                  ],
+                                ),
+                              ),
+                              onPressed: () => _clear(),
+                            )
+                          ),
+                        )
+                      ]
                     ),
-                  ),
+                  if (_imageFile == null) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.photo_camera),
+                                Text('Camera')
+                              ],
+                            ),
+                          ),
+                          onPressed: () => _pickImage(ImageSource.camera),
+                        ),
+                        FlatButton(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.photo_library),
+                                Text('Gallery')
+                              ],
+                            ),
+                          ),
+                          onPressed: () => _pickImage(ImageSource.gallery),
+                        ),
+                      ],
+                    ),
+                    if (_showImageError) ...[
+                      SizedBox(height: 10.0),
+                      Center(
+                        child: Text(
+                          'Please select an image',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 12.0
+                          )
+                        )
+                      )
+                    ]
+                  ]
                 ]
-              ),
+              )
             ),
-          )
-        ]
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        controller: _recipeNameController,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: InputDecoration(
+                          labelText: 'What is the name of your recipe?'
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a recipe name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    InputTime(
+                      label: 'Preparation time',
+                      onValueChanged: setPrepTime,
+                    ),
+                    InputTime(
+                      label: 'Cooking time',
+                      onValueChanged: setCookTime,
+                    ),
+                    InputTags(
+                      label: 'Cuisines',
+                      onValueChanged: setCuisines,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Center(
+                        child: RaisedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, or false otherwise
+                            if (validateForm()) {
+                              // close keyboard if validated
+                              FocusScope.of(context).unfocus();
+                              // form is valid so start upload
+                              _uploadRecipe(context);
+                            }
+                          },
+                          child: Text('Submit'),
+                        ),
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+            )
+          ]
+        )
       )
     );
   }

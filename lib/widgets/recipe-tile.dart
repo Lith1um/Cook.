@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cook/screens/recipe-page.dart';
 
 // Widgets
-import 'package:cook/widgets/ink-wrapper.dart';
+import 'package:cook/shared/ink-wrapper.dart';
 import 'package:cook/widgets/reviews-stars.dart';
 import 'package:cook/widgets/tags.dart';
 

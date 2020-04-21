@@ -1,16 +1,25 @@
 // Libs
-import 'package:cook/models/recipe.dart';
-import 'package:cook/widgets/recipe-tile.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+// Services
+import 'package:cook/services/recipes.dart';
+
+// Widgets
+import 'package:cook/shared/loading.dart';
+import 'package:cook/widgets/recipe-tile.dart';
+
+// Models
+import 'package:cook/models/recipe.dart';
 
 class RecipeList extends StatelessWidget {
+  final RecipesService _recipes = RecipesService();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Firestore.instance.collection('recipes').orderBy('name').snapshots(),
+      stream: _recipes.getRecipes(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return CircularProgressIndicator();
+        if (!snapshot.hasData) return Loading();
         return ListView.separated(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => RecipeTile(

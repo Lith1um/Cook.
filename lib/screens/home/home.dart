@@ -1,14 +1,13 @@
 // Libs
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 // Screens
-import 'package:cook/screens/new-recipe-page.dart';
-
-// Services
-import 'package:cook/services/auth.dart';
+import 'package:cook/screens/profile/profile-wrapper.dart';
 
 // Widgets
 import 'package:cook/widgets/recipe-list.dart';
+import 'package:cook/widgets/recipe-form.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,38 +16,46 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  final AuthService _auth = AuthService();
+  int _tabIndex = 0;
+  List<Widget> _tabs = <Widget>[
+    Container(),
+    RecipeList(),
+    RecipeForm(),
+    ProfileWrapper()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Cook.',
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
+      body: _tabs.elementAt(_tabIndex),
+      bottomNavigationBar: FFNavigationBar(
+        theme: FFNavigationBarTheme(
+          barBackgroundColor: Colors.white,
+          selectedItemBackgroundColor: Colors.blue,
+          selectedItemIconColor: Colors.white,
+          selectedItemLabelColor: Colors.blue,
+          showSelectedItemShadow: true
         ),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.exit_to_app, color: Colors.white),
-            label: Text('logout', style: TextStyle(color: Colors.white)),
-            onPressed: () async {
-              await _auth.signOut();
-            }
-          )
+        selectedIndex: _tabIndex,
+        onSelectTab: (index) => setState(() => _tabIndex = index),
+        items: [
+          FFNavigationBarItem(
+            iconData: Icons.book,
+            label: 'My Book',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.search,
+            label: 'Browse',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.add,
+            label: 'Add',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.person,
+            label: 'Profile',
+          ),
         ],
-      ),
-      body: RecipeList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NewRecipePage())
-          );
-        },
-        tooltip: 'Add Recipe',
-        child: Icon(Icons.add),
       ),
     );
   }

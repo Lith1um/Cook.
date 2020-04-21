@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Services
 import 'package:cook/services/auth.dart';
 
+// Widgets
+import 'package:cook/shared/loading.dart';
+
 // Models
 import 'package:cook/models/user.dart';
 
@@ -21,10 +24,11 @@ class _RegisterState extends State<Register> {
   final _passwordController = TextEditingController();
 
   String _registerError = '';
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return _loading ? Loading() : SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 60.0),
         child: Column(
@@ -94,14 +98,20 @@ class _RegisterState extends State<Register> {
                       if (_formKey.currentState.validate()) {
                         // close keyboard if validated
                         FocusScope.of(context).unfocus();
-                        setState(() => _registerError = '');
+                        setState(() {
+                          _loading = true;
+                          _registerError = '';
+                        });
 
                         dynamic result = await _auth.registerWithEmailPassword(
                           _usernameController.text,
                           _passwordController.text
                         );
                         if (!(result is User)) {
-                          setState(() => _registerError = result);
+                          setState(() {
+                            _loading = false;
+                            _registerError = result;
+                          });
                         }
                       }
                     }

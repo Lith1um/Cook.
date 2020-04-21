@@ -6,6 +6,7 @@ class Recipe {
   final String cuisines;
   final int reviews;
   final double reviewScore;
+  final int timeAdded;
 
   Recipe({
     this.name,
@@ -14,7 +15,8 @@ class Recipe {
     this.cookTime,
     this.cuisines,
     this.reviews = 0,
-    this.reviewScore = 0.0
+    this.reviewScore = 0.0,
+    this.timeAdded
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -25,7 +27,8 @@ class Recipe {
       cookTime: json['cookTime'],
       cuisines: json['cuisines'],
       reviews: json['reviews'],
-      reviewScore: json['reviewScore']
+      reviewScore: json['reviewScore'],
+      timeAdded: json['timeAdded']
     );
   }
 
@@ -36,6 +39,7 @@ class Recipe {
     'cookTime' : cookTime,
     'cuisines' : cuisines,
     'reviews' : reviews,
-    'reviewScore' : reviewScore
+    'reviewScore' : reviewScore,
+    'timeAdded' : timeAdded
   };
 }
