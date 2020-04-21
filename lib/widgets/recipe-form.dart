@@ -212,7 +212,6 @@ class _RecipeFormState extends State<RecipeForm> {
                       decoration: InputDecoration(
                         labelText: 'What is the name of your recipe?'
                       ),
-                      // The validator receives the text that the user has entered.
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter a recipe name';

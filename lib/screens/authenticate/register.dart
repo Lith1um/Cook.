@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Services
 import 'package:cook/services/auth.dart';
 
+// Models
+import 'package:cook/models/user.dart';
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -16,6 +19,8 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  String _registerError = '';
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +57,13 @@ class _RegisterState extends State<Register> {
                   TextFormField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                      labelText: 'Username'
+                      labelText: 'Email Address'
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Email should not be blank.';
+                      } else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
+                        return 'Email is not a valid format';
                       }
                       return null;
                     },
@@ -69,8 +76,8 @@ class _RegisterState extends State<Register> {
                       labelText: 'Password',
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Password should not be blank.';
+                      if (value.length < 8) {
+                        return 'Password must be 8+ characters.';
                       }
                       return null;
                     },
@@ -83,12 +90,24 @@ class _RegisterState extends State<Register> {
                         color: Colors.blueGrey[700]
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        
+                        // close keyboard if validated
+                        FocusScope.of(context).unfocus();
+                        setState(() => _registerError = '');
+
+                        dynamic result = await _auth.registerWithEmailPassword(
+                          _usernameController.text,
+                          _passwordController.text
+                        );
+                        if (!(result is User)) {
+                          setState(() => _registerError = result);
+                        }
                       }
                     }
-                  )
+                  ),
+                  SizedBox(height: 12.0),
+                  Text(_registerError, style: TextStyle(color: Colors.red, fontSize: 14.0))
                 ]
               )
             )

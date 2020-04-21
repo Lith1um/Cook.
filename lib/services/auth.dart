@@ -33,8 +33,42 @@ class AuthService {
   }
 
   // sign in with email/password
+  Future signInWithEmailPassword(String email, String password) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch(err) {
+      print(err.toString());
+      return err.message;
+    }
+  }
 
   // register with email/password
+  Future registerWithEmailPassword(String email, String password) async {
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch(err) {
+      print(err.toString());
+      return err.message;
+    }
+  }
+
+  // verfiy email with link
+  Future verifyEmailAddress(String email) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (!user.isEmailVerified) {
+        await user.sendEmailVerification();
+        return true;
+      }
+    } catch(err) {
+      print(err.toString());
+      return null;
+    }
+  }
 
   // sign out
   Future signOut() async {

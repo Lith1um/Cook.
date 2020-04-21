@@ -14,7 +14,7 @@ A community driven recipe book for sharing recipes and helping people to expand 
   - reviews?
 
 - build shopping list by selecting multiple recipes
-  - ticklist to confirm items bought
+  - tick list to confirm items bought
 
 - offline content?
 
@@ -27,3 +27,10 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - Bottom bar navigation 
 
 - stepped form for uploading recipes
+
+##### To-Dos
+
+- Finish user authentication
+- Add bottom bar navigation
+- place user auth into 'profile' section of main nav
+- rework for anon auth when loading the app if no user and disable features that require a user account
