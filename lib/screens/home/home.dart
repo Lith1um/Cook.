@@ -8,6 +8,7 @@ import 'package:cook/screens/profile/profile-wrapper.dart';
 // Widgets
 import 'package:cook/widgets/recipe-list.dart';
 import 'package:cook/widgets/recipe-form.dart';
+import 'package:cook/shared/member-feature.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,9 +19,17 @@ class _HomeState extends State<Home> {
 
   int _tabIndex = 0;
   List<Widget> _tabs = <Widget>[
-    Container(),
+    MemberFeature(
+      content: Container(
+        child: Center(
+          child:Text('your book')
+        )
+      )
+    ),
     RecipeList(),
-    RecipeForm(),
+    MemberFeature(
+      content: RecipeForm()
+    ),
     ProfileWrapper()
   ];
 

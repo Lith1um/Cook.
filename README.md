@@ -10,7 +10,7 @@ A community driven recipe book for sharing recipes and helping people to expand 
   - cook time
   - instructions
   - photo
-  - cuisine
+  - tags
   - reviews?
 
 - build shopping list by selecting multiple recipes
@@ -26,4 +26,5 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - stepped form for uploading recipes
 - place user auth into 'profile' section of main nav
   - verify email functionality
-- rework for anon auth when loading the app if no user and disable features that require a user account
+- rework to disable features that require a user account unless signed in
+- search functionality for recipes

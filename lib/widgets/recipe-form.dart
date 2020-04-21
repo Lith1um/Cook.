@@ -1,6 +1,5 @@
 // Libs
 import 'dart:io';
-import 'package:cook/widgets/inputs/input-tags.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,7 +9,8 @@ import 'package:cook/services/recipe-upload.dart';
 import 'package:cook/services/recipe-picture-upload.dart';
 
 // Widgets
-import 'package:cook/widgets/inputs/input-time.dart';
+import 'package:cook/shared/inputs/input-tags.dart';
+import 'package:cook/shared/inputs/input-time.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';

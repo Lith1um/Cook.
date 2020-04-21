@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Widgets
-import 'package:cook/widgets/tags.dart';
+import 'package:cook/shared/tags.dart';
 
 class InputTags extends StatefulWidget {
   final String label;

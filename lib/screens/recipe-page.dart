@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cook/services/recipe-delete.dart';
 
 // Widgets
-import 'package:cook/widgets/reviews-stars.dart';
+import 'package:cook/shared/reviews-stars.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
