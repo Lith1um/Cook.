@@ -42,7 +42,7 @@ class MemberFeature extends StatelessWidget {
               Container(
                 width: 200.0,
                 child: Text(
-                  'Please log in or sign up for an account on the \'profile\' tab to acsess this feature',
+                  'Please log in or sign up for an account on the \'profile\' tab to access this feature',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Colors.blueGrey[700]

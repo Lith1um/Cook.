@@ -1,9 +1,6 @@
 // Libs
 import 'package:flutter/material.dart';
 
-// Services
-import 'package:cook/services/recipes.dart';
-
 // Widgets
 import 'package:cook/shared/loading.dart';
 import 'package:cook/widgets/recipe-tile.dart';
@@ -12,12 +9,15 @@ import 'package:cook/widgets/recipe-tile.dart';
 import 'package:cook/models/recipe.dart';
 
 class RecipeList extends StatelessWidget {
-  final RecipesService _recipes = RecipesService();
+  
+  final Stream recipesStream;
+
+  const RecipeList({@required this.recipesStream});
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _recipes.getRecipes(),
+      stream: recipesStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loading();
         return ListView.separated(

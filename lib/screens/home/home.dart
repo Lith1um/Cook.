@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 // Screens
 import 'package:cook/screens/profile/profile-wrapper.dart';
 
+// Services
+import 'package:cook/services/recipes.dart';
+
 // Widgets
 import 'package:cook/widgets/recipe-list.dart';
+import 'package:cook/screens/recipe-book/recipe-book.dart';
 import 'package:cook/widgets/recipe-form.dart';
 import 'package:cook/shared/member-feature.dart';
 
@@ -17,15 +21,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  static final RecipesService _recipesService = RecipesService();
+
   int _tabIndex = 0;
   List<Widget> _tabs = <Widget>[
-    RecipeList(),
+    RecipeList(recipesStream: _recipesService.getAllRecipes()),
     MemberFeature(
-      content: Container(
-        child: Center(
-          child:Text('your book')
-        )
-      )
+      content: RecipeBook()
     ),
     MemberFeature(
       content: RecipeForm()

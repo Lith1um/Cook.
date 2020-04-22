@@ -29,8 +29,9 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - better firebase auth rules
 - images aren't currently deleted when recipe is
 - user profile linked to firebase user
- - display name
- - avatar
+  - display name
+  - avatar
+- allow users to 'favourite' recipes
 - build own recipes page
   - tabs for own recipes and favourited ones
 - create reuseable tabs widget

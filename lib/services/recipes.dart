@@ -5,8 +5,12 @@ class RecipesService {
 
   final CollectionReference _recipeCollection = Firestore.instance.collection('recipes');
 
-  Stream getRecipes([String orderBy = 'name']) {
+  Stream getAllRecipes([String orderBy = 'name']) {
     return _recipeCollection.orderBy(orderBy).snapshots();
+  }
+
+  Stream getRecipesForUser(String uid, [String orderBy = 'timeAdded']) {
+    return _recipeCollection.where('creator', isEqualTo: uid).orderBy(orderBy).snapshots();
   }
 
 }

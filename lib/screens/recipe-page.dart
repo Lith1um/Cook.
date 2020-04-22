@@ -90,7 +90,8 @@ class _RecipePageState extends State<RecipePage> {
           Builder(builder: (context) =>
             IconButton(
               icon: Icon(
-                _favourite ? Icons.star : Icons.star_border
+                _favourite ? Icons.favorite : Icons.favorite_border,
+                color: _favourite ? Colors.red[600] : Colors.white
               ),
               onPressed: setFavourite
             )
