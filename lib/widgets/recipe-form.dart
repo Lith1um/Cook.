@@ -5,6 +5,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Services
+import 'package:cook/services/auth.dart';
 import 'package:cook/services/recipe-upload.dart';
 import 'package:cook/services/recipe-picture-upload.dart';
 
@@ -14,6 +15,7 @@ import 'package:cook/shared/inputs/input-time.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
+import 'package:cook/models/user.dart';
 
 class RecipeForm extends StatefulWidget {
   @override
@@ -21,6 +23,9 @@ class RecipeForm extends StatefulWidget {
 }
 
 class _RecipeFormState extends State<RecipeForm> {
+
+  final AuthService _auth = AuthService();
+
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
 
@@ -89,6 +94,7 @@ class _RecipeFormState extends State<RecipeForm> {
   }
 
   void _uploadRecipe(BuildContext context) async {
+    User currentUser = await _auth.getCurrentUser();
     String imageUrl = await uploadRecipePhoto(_imageFile);
     String recipeName = _recipeNameController.text;
 
@@ -98,7 +104,8 @@ class _RecipeFormState extends State<RecipeForm> {
       prepTime: _prepTime,
       cookTime: _cookTime,
       cuisines: _cuisines,
-      timeAdded: DateTime.now().millisecondsSinceEpoch
+      timeAdded: DateTime.now().millisecondsSinceEpoch,
+      creator: currentUser.uid
     );
     await addNewRecipe(recipe);
 

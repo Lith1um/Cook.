@@ -22,12 +22,15 @@ A community driven recipe book for sharing recipes and helping people to expand 
 ##### To-Dos
 
 - stepped form for uploading recipes
+- refactor recipe form to having image upload section be its own widget
 - verify email functionality
   - prevent profile changes until email is verified
 - search functionality for recipes
-- better firebase auth
+- better firebase auth rules
 - images aren't currently deleted when recipe is
-- refactor recipe form to having image upload section be its own widget
 - user profile linked to firebase user
  - display name
  - avatar
+- build own recipes page
+  - tabs for own recipes and favourited ones
+- create reuseable tabs widget
