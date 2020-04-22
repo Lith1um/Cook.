@@ -1,6 +1,9 @@
 // Libs
 import 'package:firebase_auth/firebase_auth.dart';
 
+// Services
+import 'package:cook/services/user.dart';
+
 // Models
 import 'package:cook/models/user.dart';
 
@@ -11,7 +14,12 @@ class AuthService {
 
   // create user based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null
+      ? User(
+        uid: user.uid,
+        isVerified: user.isEmailVerified
+      )
+      : null;
   }
 
   // auth change user stream
@@ -49,6 +57,13 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      
+      // send verification email
+      user.sendEmailVerification();
+
+      // create a new doc for the user with the uid
+      await UserService(uid: user.uid).createUserData(user.email, '');
+
       return _userFromFirebaseUser(user);
     } catch(err) {
       print(err.toString());
@@ -57,10 +72,10 @@ class AuthService {
   }
 
   // verfiy email with link
-  Future verifyEmailAddress(String email) async {
+  Future verifyEmailAddress() async {
     try {
       FirebaseUser user = await _auth.currentUser();
-      if (!user.isEmailVerified) {
+      if (user != null && !user.isEmailVerified) {
         await user.sendEmailVerification();
         return true;
       }

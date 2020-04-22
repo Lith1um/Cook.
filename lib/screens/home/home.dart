@@ -19,6 +19,7 @@ class _HomeState extends State<Home> {
 
   int _tabIndex = 0;
   List<Widget> _tabs = <Widget>[
+    RecipeList(),
     MemberFeature(
       content: Container(
         child: Center(
@@ -26,7 +27,6 @@ class _HomeState extends State<Home> {
         )
       )
     ),
-    RecipeList(),
     MemberFeature(
       content: RecipeForm()
     ),
@@ -49,12 +49,12 @@ class _HomeState extends State<Home> {
         onSelectTab: (index) => setState(() => _tabIndex = index),
         items: [
           FFNavigationBarItem(
-            iconData: Icons.book,
-            label: 'My Book',
-          ),
-          FFNavigationBarItem(
             iconData: Icons.search,
             label: 'Browse',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.book,
+            label: 'My Book',
           ),
           FFNavigationBarItem(
             iconData: Icons.add,

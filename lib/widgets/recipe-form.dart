@@ -30,7 +30,6 @@ class _RecipeFormState extends State<RecipeForm> {
   int _cookTime;
   String _cuisines;
 
-  // TODO: move to separate widget
   Future<void> _pickImage(ImageSource source) async {
     File _selected = await ImagePicker.pickImage(source: source);
 

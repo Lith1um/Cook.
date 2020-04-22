@@ -26,6 +26,33 @@ class _RegisterState extends State<Register> {
   String _registerError = '';
   bool _loading = false;
 
+  Future<void> _accountCreated() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Account created!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Thanks for signing up! A confirmation email has been sent to you. Follow the directions in the email to complete setting up your account.')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return _loading ? Loading() : Form(
@@ -84,6 +111,7 @@ class _RegisterState extends State<Register> {
                     _registerError = result;
                   });
                 }
+                _accountCreated();
               }
             }
           ),

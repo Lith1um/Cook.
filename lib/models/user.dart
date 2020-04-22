@@ -1,7 +1,8 @@
 class User {
 
   final String uid;
+  final bool isVerified;
 
-  User({ this.uid });
+  User({ this.uid, this.isVerified });
 
 }
