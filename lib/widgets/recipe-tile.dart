@@ -76,10 +76,10 @@ class RecipeTile extends StatelessWidget {
                     SizedBox(height: 2.0),
                     Text('Cooking time: ${recipe.cookTime} mins'),
                   ],
-                  if (recipe.cuisines != null) ...[
+                  if (recipe.tags != null) ...[
                     SizedBox(height: 5.0),
                     Tags(
-                      tagsText: recipe.cuisines,
+                      tagsText: recipe.tags,
                       size: 12.0,
                     )
                   ]

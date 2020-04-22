@@ -5,7 +5,7 @@ class Recipe {
   final List<dynamic> steps;
   final int prepTime;
   final int cookTime;
-  final String cuisines;
+  final String tags;
   final int reviews;
   final double reviewScore;
   final int timeAdded;
@@ -18,7 +18,7 @@ class Recipe {
     this.steps,
     this.prepTime,
     this.cookTime,
-    this.cuisines,
+    this.tags,
     this.reviews = 0,
     this.reviewScore = 0.0,
     this.timeAdded,
@@ -33,7 +33,7 @@ class Recipe {
       steps: json['steps'],
       prepTime: json['prepTime'],
       cookTime: json['cookTime'],
-      cuisines: json['cuisines'],
+      tags: json['tags'],
       reviews: json['reviews'],
       reviewScore: json['reviewScore'],
       timeAdded: json['timeAdded'],
@@ -48,7 +48,7 @@ class Recipe {
     'steps' : steps,
     'prepTime' : prepTime,
     'cookTime' : cookTime,
-    'cuisines' : cuisines,
+    'tags' : tags,
     'reviews' : reviews,
     'reviewScore' : reviewScore,
     'timeAdded' : timeAdded,

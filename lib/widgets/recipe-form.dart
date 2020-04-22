@@ -10,6 +10,7 @@ import 'package:cook/services/recipe-upload.dart';
 import 'package:cook/services/recipe-picture-upload.dart';
 
 // Widgets
+import 'package:cook/shared/inputs/input-list.dart';
 import 'package:cook/shared/inputs/input-tags.dart';
 import 'package:cook/shared/inputs/input-time.dart';
 
@@ -31,9 +32,11 @@ class _RecipeFormState extends State<RecipeForm> {
 
   File _imageFile;
   bool _showImageError = false;
+  List<String> _ingredients;
+  List<String> _steps;
   int _prepTime;
   int _cookTime;
-  String _cuisines;
+  String _tags;
 
   Future<void> _pickImage(ImageSource source) async {
     File _selected = await ImagePicker.pickImage(source: source);
@@ -58,27 +61,7 @@ class _RecipeFormState extends State<RecipeForm> {
   }
 
   void _clear() {
-    setState(() {
-      _imageFile = null;
-    });
-  }
-
-  void setPrepTime(int timeInMinutes) {
-    setState(() {
-      _prepTime = timeInMinutes;
-    });
-  }
-
-  void setCookTime(int timeInMinutes) {
-    setState(() {
-      _cookTime = timeInMinutes;
-    });
-  }
-
-  void setCuisines(String tags) {
-    setState(() {
-      _cuisines = tags;
-    });
+    setState(() => _imageFile = null);
   }
 
   bool validateForm() {
@@ -101,9 +84,11 @@ class _RecipeFormState extends State<RecipeForm> {
     Recipe recipe = Recipe(
       name: recipeName,
       imageUrl: imageUrl,
+      ingredients: _ingredients,
+      steps: _steps,
       prepTime: _prepTime,
       cookTime: _cookTime,
-      cuisines: _cuisines,
+      tags: _tags,
       timeAdded: DateTime.now().millisecondsSinceEpoch,
       creator: currentUser.uid
     );
@@ -119,7 +104,7 @@ class _RecipeFormState extends State<RecipeForm> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -208,7 +193,7 @@ class _RecipeFormState extends State<RecipeForm> {
             Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -218,7 +203,7 @@ class _RecipeFormState extends State<RecipeForm> {
                         controller: _recipeNameController,
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
-                          labelText: 'What is the name of your recipe?'
+                          labelText: 'What are you making?'
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
@@ -230,15 +215,29 @@ class _RecipeFormState extends State<RecipeForm> {
                     ),
                     InputTime(
                       label: 'Preparation time',
-                      onValueChanged: setPrepTime,
+                      onValueChanged: (int minutes) =>
+                        setState(() => _prepTime = minutes),
                     ),
                     InputTime(
                       label: 'Cooking time',
-                      onValueChanged: setCookTime,
+                      onValueChanged: (int minutes) =>
+                        setState(() => _cookTime = minutes),
+                    ),
+                    InputList(
+                      label: 'Ingredients',
+                      onValueChanged: (List<String> list) =>
+                        setState(() => _ingredients = list)
+                    ),
+                    InputList(
+                      label: 'Steps',
+                      numberedList: true,
+                      onValueChanged: (List<String> list) =>
+                        setState(() => _steps = list)
                     ),
                     InputTags(
-                      label: 'Cuisines',
-                      onValueChanged: setCuisines,
+                      label: 'Tags',
+                      onValueChanged: (String tags) =>
+                        setState(() => _tags = tags),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -253,7 +252,7 @@ class _RecipeFormState extends State<RecipeForm> {
                               _uploadRecipe(context);
                             }
                           },
-                          child: Text('Submit'),
+                          child: Text('Upload'),
                         ),
                       ),
                     ),

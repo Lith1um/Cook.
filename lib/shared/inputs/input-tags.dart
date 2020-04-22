@@ -30,12 +30,18 @@ class _InputTagsState extends State<InputTags> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            widget.label,
+            style: TextStyle(
+              fontSize: 18.0
+            )
+          ),
+          SizedBox(height: 5.0),
           Tags(tagsText: _tagsText),
           TextFormField(
             controller: _controller,
             textCapitalization: TextCapitalization.words,
             decoration: InputDecoration(
-              labelText: widget.label,
               hintText: 'use \',\' to separate tags'
             ),
             onChanged: onTagFieldChanged,

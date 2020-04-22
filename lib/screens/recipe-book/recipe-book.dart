@@ -2,9 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// Screens
-import 'package:cook/screens/recipe-book/favourites.dart';
-
 // Services
 import 'package:cook/services/recipes.dart';
 
