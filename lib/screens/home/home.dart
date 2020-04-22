@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 // Screens
 import 'package:cook/screens/profile/profile-wrapper.dart';
+import 'package:cook/screens/recipe-book/favourites.dart';
 
 // Services
 import 'package:cook/services/recipes.dart';
@@ -31,6 +32,9 @@ class _HomeState extends State<Home> {
     ),
     MemberFeature(
       content: RecipeForm()
+    ),
+    MemberFeature(
+      content: Favourites()
     ),
     ProfileWrapper()
   ];
@@ -61,6 +65,10 @@ class _HomeState extends State<Home> {
           FFNavigationBarItem(
             iconData: Icons.add,
             label: 'Add',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.favorite,
+            label: 'Favourites',
           ),
           FFNavigationBarItem(
             iconData: Icons.person,

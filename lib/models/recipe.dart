@@ -1,6 +1,8 @@
 class Recipe {
   final String name;
   final String imageUrl;
+  final List<dynamic> ingredients;
+  final List<dynamic> steps;
   final int prepTime;
   final int cookTime;
   final String cuisines;
@@ -11,7 +13,9 @@ class Recipe {
 
   Recipe({
     this.name,
-    this.imageUrl, 
+    this.imageUrl,
+    this.ingredients,
+    this.steps,
     this.prepTime,
     this.cookTime,
     this.cuisines,
@@ -25,6 +29,8 @@ class Recipe {
     return Recipe(
       name: json['name'],
       imageUrl: json['imageUrl'],
+      ingredients: json['ingredients'],
+      steps: json['steps'],
       prepTime: json['prepTime'],
       cookTime: json['cookTime'],
       cuisines: json['cuisines'],
@@ -38,6 +44,8 @@ class Recipe {
   Map<String, dynamic> toJson() => {
     'name' : name,
     'imageUrl' : imageUrl,
+    'ingredients' : ingredients,
+    'steps' : steps,
     'prepTime' : prepTime,
     'cookTime' : cookTime,
     'cuisines' : cuisines,

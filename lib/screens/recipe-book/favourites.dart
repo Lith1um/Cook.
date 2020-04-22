@@ -11,7 +11,7 @@ class Favourites extends StatelessWidget {
           Icon(
             Icons.favorite_border,
             size: 60.0,
-            color: Colors.blueGrey[700],
+            color: Colors.blueGrey[500],
           ),
           SizedBox(height: 12.0),
           Container(

@@ -23,11 +23,11 @@ A community driven recipe book for sharing recipes and helping people to expand 
 
 - stepped form for uploading recipes
 - refactor recipe form to having image upload section be its own widget
+- images aren't currently deleted when recipe is
 - verify email functionality
   - prevent profile changes until email is verified
 - search functionality for recipes
 - better firebase auth rules
-- images aren't currently deleted when recipe is
 - user profile linked to firebase user
   - display name
   - avatar
