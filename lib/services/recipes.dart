@@ -5,7 +5,7 @@ class RecipesService {
 
   final CollectionReference _recipeCollection = Firestore.instance.collection('recipes');
 
-  Stream getAllRecipes([String orderBy = 'name']) {
+  Stream getAllRecipes([String orderBy = 'timeAdded']) {
     return _recipeCollection.orderBy(orderBy).snapshots();
   }
 
