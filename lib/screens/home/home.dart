@@ -10,9 +10,9 @@ import 'package:cook/screens/recipe-book/favourites.dart';
 import 'package:cook/services/recipes.dart';
 
 // Widgets
-import 'package:cook/widgets/recipe-list.dart';
+import 'package:cook/shared/recipe-list.dart';
 import 'package:cook/screens/recipe-book/recipe-book.dart';
-import 'package:cook/widgets/recipe-form.dart';
+import 'package:cook/screens/add/recipe-form.dart';
 import 'package:cook/shared/member-feature.dart';
 
 class Home extends StatefulWidget {

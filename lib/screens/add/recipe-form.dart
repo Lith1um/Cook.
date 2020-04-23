@@ -119,8 +119,16 @@ class _RecipeFormState extends State<RecipeForm> {
     );
     await addNewRecipe(recipe);
 
+    // reset form and close dialog
     _resetForm();
     Navigator.of(context).pop();
+
+    // add snackbar confirming upload
+    final snackBar = SnackBar(
+      content: Text('Upload successful!'),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   void _showLoadingDialog(BuildContext context) {

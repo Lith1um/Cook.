@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // Screens
-import 'package:cook/screens/recipe-page.dart';
+import 'package:cook/screens/recipe/recipe-page.dart';
 
 // Widgets
 import 'package:cook/shared/ink-wrapper.dart';

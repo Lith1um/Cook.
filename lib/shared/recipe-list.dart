@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Widgets
 import 'package:cook/shared/loading.dart';
-import 'package:cook/widgets/recipe-tile.dart';
+import 'package:cook/shared/recipe-tile.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';

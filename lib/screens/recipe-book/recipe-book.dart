@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:cook/services/recipes.dart';
 
 // Widgets
-import 'package:cook/widgets/recipe-list.dart';
+import 'package:cook/shared/recipe-list.dart';
 
 // Models
 import 'package:cook/models/user.dart';
