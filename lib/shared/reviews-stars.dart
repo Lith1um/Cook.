@@ -7,8 +7,8 @@ class ReviewStars extends StatelessWidget {
   final double size;
 
   const ReviewStars({
-    @required this.reviews,
     @required this.score,
+    this.reviews,
     this.size = 12.0
   });
 
@@ -21,7 +21,7 @@ class ReviewStars extends StatelessWidget {
       stars.add(
         Icon(
           Icons.star,
-          color: i+1 <= rounded ? Colors.amber : Colors.grey,
+          color: i+1 <= rounded ? Colors.amber : Colors.grey[350],
           size: size + 4.0,
         ),
       );
@@ -34,13 +34,14 @@ class ReviewStars extends StatelessWidget {
     return Row(
       children: [
         ...getStars(),
-        Text(
-          ' ($reviews)',
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: size
-          ),
-        )
+        if (reviews != null)
+          Text(
+            ' ($reviews)',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: size
+            ),
+          )
       ]
     );
   }

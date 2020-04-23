@@ -24,19 +24,19 @@ class RecipeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-      child: InkWrapper(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RecipePage(
-              recipe: recipe,
-              documentReference: documentReference
-            ))
-          );
-        },
-        borderRadius: BorderRadius.circular(10.0),
+    return InkWrapper(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RecipePage(
+            recipe: recipe,
+            documentReference: documentReference
+          ))
+        );
+      },
+      borderRadius: BorderRadius.circular(10.0),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
         child: Column(
           children: <Widget>[
             Stack(
@@ -47,9 +47,9 @@ class RecipeTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black45,
-                        blurRadius: 10.0,
-                        spreadRadius: 1.0,
+                        color: Colors.black26,
+                        blurRadius: 5.0,
+                        spreadRadius: -1.0,
                         offset: Offset(0.0, 4.0),
                       )
                     ]
@@ -114,15 +114,14 @@ class RecipeTile extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Icon(Icons.timer, color: Colors.blue[800],),
-                        SizedBox(width: 12.0),
+                        SizedBox(width: 5.0),
                         Text('${recipe.prepTime + recipe.cookTime} mins'),
                       ]
                     )
                   ),
                   ReviewStars(
-                    reviews: recipe.reviews,
                     score: recipe.reviewScore,
-                    size: 16.0,
+                    size: 14.0,
                   )
                 ]
               ),
@@ -130,61 +129,6 @@ class RecipeTile extends StatelessWidget {
           ]
         )
       )
-      // child: Padding(
-      //   padding: EdgeInsets.all(10.0),
-      //   child: Row(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: <Widget>[
-      //       Column(
-      //         children: [
-      //           SizedBox(
-      //             height: 100.0,
-      //             width: 100.0,
-      //             child: CachedNetworkImage(
-      //               imageUrl: recipe.imageUrl,
-      //               fit: BoxFit.fitWidth
-      //             ),
-      //           ),
-      //           SizedBox(height: 4.0),
-      //           ReviewStars(
-      //             reviews: recipe.reviews,
-      //             score: recipe.reviewScore
-      //           )
-      //         ],
-      //       ),
-      //       SizedBox(width: 10.0),
-      //       Expanded(
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             Text(
-      //               recipe.name,
-      //               style: TextStyle(
-      //                 fontWeight: FontWeight.bold,
-      //                 fontSize: 20.0
-      //               ),
-      //             ),
-      //             if (recipe.prepTime != null) ...[
-      //               SizedBox(height: 2.0),
-      //               Text('Preparation time: ${recipe.prepTime} mins'),
-      //             ],
-      //             if (recipe.cookTime != null) ...[
-      //               SizedBox(height: 2.0),
-      //               Text('Cooking time: ${recipe.cookTime} mins'),
-      //             ],
-      //             if (recipe.tags != null) ...[
-      //               SizedBox(height: 5.0),
-      //               Tags(
-      //                 tagsText: recipe.tags,
-      //                 size: 12.0,
-      //               )
-      //             ]
-      //           ]
-      //         )
-      //       )
-      //     ],
-      //   )
-      // )
     );
   }
 }

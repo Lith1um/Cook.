@@ -9,6 +9,7 @@ import 'package:cook/services/recipe-delete.dart';
 // Widgets
 import 'package:cook/shared/ink-wrapper.dart';
 import 'package:cook/shared/reviews-stars.dart';
+import 'package:cook/screens/recipe/item-list.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
@@ -86,37 +87,6 @@ class _RecipePageState extends State<RecipePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: AppBar(
-      //   title: Text(widget.recipe.name),
-      //   actions: <Widget>[
-      //     Builder(builder: (context) =>
-      //       IconButton(
-      //         icon: Icon(
-      //           _favourite ? Icons.favorite : Icons.favorite_border,
-      //           color: _favourite ? Colors.red[600] : Colors.white
-      //         ),
-      //         onPressed: setFavourite
-      //       )
-      //     ),
-      //     PopupMenuButton(
-      //       itemBuilder: (BuildContext context) {
-      //         return _menuOptions.map((String option) {
-      //           return PopupMenuItem(
-      //             value: option,
-      //             child: Text(
-      //               option,
-      //               style: TextStyle(
-      //                 fontWeight: FontWeight.bold,
-      //                 color: option == 'Delete' ? Colors.red : Colors.black
-      //               ),
-      //             ),
-      //           );
-      //         }).toList();
-      //       },
-      //       onSelected: onMenuOptionSelected,
-      //     )
-      //   ],
-      // ),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -134,7 +104,7 @@ class _RecipePageState extends State<RecipePage> {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 30.0),
-                          padding: EdgeInsets.all(20.0),
+                          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: Colors.blue[800],
@@ -178,7 +148,15 @@ class _RecipePageState extends State<RecipePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Total time: ${widget.recipe.prepTime + widget.recipe.cookTime} mins'),
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.timer, color: Colors.blue[800],),
+                            SizedBox(width: 5.0),
+                            Text('${widget.recipe.prepTime + widget.recipe.cookTime} mins'),
+                          ]
+                        )
+                      ),
                       ReviewStars(
                         reviews: widget.recipe.reviews,
                         score: widget.recipe.reviewScore,
@@ -187,7 +165,24 @@ class _RecipePageState extends State<RecipePage> {
                     ]
                   ),
                 ),
-                SizedBox(height: 50.0)
+                Container(
+                  margin: EdgeInsets.all(30.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ingredients',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0
+                        )
+                      ),
+                      SizedBox(height: 10.0),
+                      ItemList(widget.recipe.ingredients)
+                    ]
+                  )
+                )
               ]
             ),
             SafeArea(
@@ -209,23 +204,28 @@ class _RecipePageState extends State<RecipePage> {
             SafeArea(
               child: Align(
                 alignment: Alignment.topRight,
-                child: InkWrapper(
-                  borderRadius: BorderRadius.circular(60.0),
-                  child: Container(
-                    height: 60.0,
-                    width: 60.0,
-                    child: IconButton(
-                      icon: Icon(
-                        _favourite ? Icons.favorite : Icons.favorite_border,
-                        color: _favourite ? Colors.red[600] : Colors.white
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    InkWrapper(
+                      borderRadius: BorderRadius.circular(60.0),
+                      child: Container(
+                        height: 60.0,
+                        width: 60.0,
+                        child: IconButton(
+                          icon: Icon(
+                            _favourite ? Icons.favorite : Icons.favorite_border,
+                            color: _favourite ? Colors.red[600] : Colors.white
+                          ),
+                          iconSize: 28.0,
+                          color: Colors.white,
+                          onPressed: () {}
+                        ),
                       ),
-                      iconSize: 28.0,
-                      color: Colors.white,
-                      onPressed: () {}
-                    ),
-                  ),
-                  onTap: setFavourite,
-                ),
+                      onTap: setFavourite,
+                    )
+                  ]
+                )
               )
             ),
           ]
