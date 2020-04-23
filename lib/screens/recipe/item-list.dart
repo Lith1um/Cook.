@@ -56,7 +56,7 @@ class ItemList extends StatelessWidget {
               SizedBox(width: 20.0),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 6.0),
+                  padding: EdgeInsets.only(top: 5.0),
                   child: Text(
                     '${itemList[index].toString()}',
                     style: TextStyle(fontSize: size)

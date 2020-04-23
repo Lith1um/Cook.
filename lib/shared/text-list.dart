@@ -30,11 +30,22 @@ class TextList extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: spacing),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded(
+              Padding(
+                padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-                  ' ${getPoint(index)} ${textList[index].toString()}',
+                  ' ${getPoint(index)} ',
                   style: style
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 6.0),
+                  child: Text(
+                    '${textList[index].toString()}',
+                    style: style
+                  )
                 ),
               ),
               if (onDelete != null)

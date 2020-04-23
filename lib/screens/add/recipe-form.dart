@@ -29,6 +29,7 @@ class _RecipeFormState extends State<RecipeForm> {
 
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
+  final _recipeDescriptionController = TextEditingController();
 
   File _imageFile;
   bool _showImageError = false;
@@ -77,6 +78,7 @@ class _RecipeFormState extends State<RecipeForm> {
   void _resetForm() {
     setState(() {
       _recipeNameController.text = '';
+      _recipeDescriptionController.text = '';
       _imageFile = null;
       _ingredientsKey.currentState.reset();
       _stepsKey.currentState.reset();
@@ -105,9 +107,11 @@ class _RecipeFormState extends State<RecipeForm> {
     User currentUser = await _auth.getCurrentUser();
     String imageUrl = await uploadRecipePhoto(_imageFile);
     String recipeName = _recipeNameController.text;
+    String description = _recipeDescriptionController.text;
 
     Recipe recipe = Recipe(
       name: recipeName,
+      description: description,
       imageUrl: imageUrl,
       ingredients: _ingredients,
       steps: _steps,
@@ -154,6 +158,13 @@ class _RecipeFormState extends State<RecipeForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+              child: Text(
+                'Upload a new recipe',
+                style: TextStyle(fontSize: 24.0),
+              )
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
               child: Column(
@@ -252,6 +263,7 @@ class _RecipeFormState extends State<RecipeForm> {
                       padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         controller: _recipeNameController,
+                        maxLines: null,
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           labelText: 'What are you making?'
@@ -262,6 +274,17 @@ class _RecipeFormState extends State<RecipeForm> {
                           }
                           return null;
                         },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        controller: _recipeDescriptionController,
+                        maxLines: null,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: InputDecoration(
+                          labelText: 'Tell us a bit about this recipe'
+                        ),
                       ),
                     ),
                     InputTime(

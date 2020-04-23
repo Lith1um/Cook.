@@ -45,6 +45,7 @@ class InputTagsState extends State<InputTags> {
           Tags(tagsText: _tagsText),
           TextFormField(
             controller: _controller,
+            maxLines: null,
             textCapitalization: TextCapitalization.words,
             decoration: InputDecoration(
               hintText: 'use \',\' to separate tags'

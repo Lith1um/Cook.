@@ -68,6 +68,7 @@ class InputListState extends State<InputList> {
               Expanded(
                 child: TextFormField(
                   controller: _controller,
+                  maxLines: null,
                   textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
                     hintText: 'add something!',

@@ -172,6 +172,10 @@ class _RecipePageState extends State<RecipePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (widget.recipe.description != null && widget.recipe.description != '') ...[
+                        Text(widget.recipe.description, textAlign: TextAlign.justify),
+                        SizedBox(height: 20.0),
+                      ],
                       Text(
                         'Ingredients',
                         style: TextStyle(
