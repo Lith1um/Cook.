@@ -16,8 +16,11 @@ A community driven recipe book for sharing recipes and helping people to expand 
   - display name
   - avatar
 - allow users to 'favourite' recipes
-- build own recipes page
-  - tabs for own recipes and favourited ones
+
+- fields to add:
+  - description
+  - difficulty
+  - servings count
 
 
 ##### Bugs

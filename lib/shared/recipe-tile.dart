@@ -9,7 +9,6 @@ import 'package:cook/screens/recipe/recipe-page.dart';
 // Widgets
 import 'package:cook/shared/ink-wrapper.dart';
 import 'package:cook/shared/reviews-stars.dart';
-import 'package:cook/shared/tags.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
@@ -19,8 +18,6 @@ class RecipeTile extends StatelessWidget {
   final DocumentReference documentReference;
 
   RecipeTile({@required this.recipe, @required this.documentReference});
-
-  final double borderRadiusValue = 10.0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,6 @@ class RecipeTile extends StatelessWidget {
           ))
         );
       },
-      borderRadius: BorderRadius.circular(10.0),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
         child: Column(

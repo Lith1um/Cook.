@@ -5,21 +5,41 @@ class ItemList extends StatelessWidget {
   final List<dynamic> itemList;
   final bool numberedList;
   final double spacing;
-  final TextStyle style;
-  final Function onDelete;
+  final double size;
 
   ItemList(
     this.itemList,
     {
       this.numberedList = false,
-      this.spacing = 5.0,
-      this.style,
-      this.onDelete
+      this.spacing = 10.0,
+      this.size = 18.0
     }
   );
 
-  String getPoint(int index) {
-    return numberedList ? '${index+1}.' : '\u2022';
+  Widget getPoint(int index) {
+    Widget value = numberedList 
+      ? Text('${index+1}', style: TextStyle(fontSize: size))
+      : Icon(Icons.add, size: size);
+
+    return Container(
+      height: 32.0,
+      width: 32.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 5.0,
+            spreadRadius: -1.0,
+            offset: Offset(0.0, 3.0),
+          )
+        ]
+      ),
+      child: Center(
+        child: value,
+      )
+    );
   }
 
   @override
@@ -30,25 +50,19 @@ class ItemList extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: spacing),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              getPoint(index),
+              SizedBox(width: 20.0),
               Expanded(
-                child: Text(
-                  ' ${getPoint(index)} ${itemList[index].toString()}',
-                  style: style
+                child: Padding(
+                  padding: EdgeInsets.only(top: 6.0),
+                  child: Text(
+                    '${itemList[index].toString()}',
+                    style: TextStyle(fontSize: size)
+                  ),
                 ),
               ),
-              if (onDelete != null)
-                Container(
-                  height: 32.0,
-                  width: 48.0,
-                  child: IconButton(
-                    padding: EdgeInsets.all(0.0),
-                    icon: Icon(Icons.clear),
-                    color: Colors.red,
-                    iconSize: 24.0,
-                    onPressed: () => onDelete(index)
-                  )
-                )
             ],
           )
         )

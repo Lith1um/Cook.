@@ -1,6 +1,7 @@
 // Libs
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cook/shared/tags.dart';
 import 'package:flutter/material.dart';
 
 // Services
@@ -118,7 +119,7 @@ class _RecipePageState extends State<RecipePage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18.0
+                              fontSize: 22.0
                             ),
                           ),
                         )
@@ -175,11 +176,31 @@ class _RecipePageState extends State<RecipePage> {
                         'Ingredients',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 22.0
+                        )
+                      ),
+                      SizedBox(height: 10.0),
+                      ItemList(widget.recipe.ingredients),
+                      SizedBox(height: 20.0),
+                      Text(
+                        'Steps',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0
+                        )
+                      ),
+                      SizedBox(height: 10.0),
+                      ItemList(widget.recipe.steps, numberedList: true),
+                      SizedBox(height: 20.0),
+                      Text(
+                        'Tags',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 20.0
                         )
                       ),
                       SizedBox(height: 10.0),
-                      ItemList(widget.recipe.ingredients)
+                      Tags(tagsText: widget.recipe.tags, size: 16.0,),
                     ]
                   )
                 )
