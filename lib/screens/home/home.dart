@@ -46,9 +46,9 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
           barBackgroundColor: Colors.white,
-          selectedItemBackgroundColor: Colors.blue,
+          selectedItemBackgroundColor: Colors.blue[800],
           selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.blue[600],
+          selectedItemLabelColor: Colors.blue[800],
           showSelectedItemShadow: true
         ),
         selectedIndex: _tabIndex,

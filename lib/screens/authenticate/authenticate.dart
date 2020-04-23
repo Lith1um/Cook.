@@ -92,8 +92,8 @@ class _AuthenticateState extends State<Authenticate> with TickerProviderStateMix
                   fontWeight: FontWeight.bold,
                 ),
                 controller: _tabController,
-                indicatorColor: Colors.blue,
-                labelColor: Colors.blue,
+                indicatorColor: Colors.blue[800],
+                labelColor: Colors.blue[800],
                 tabs: _tabs
               ),
             ),

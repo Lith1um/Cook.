@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Cook.',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.blue[990],
         ),
         home: Home(),
       ),

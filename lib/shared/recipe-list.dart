@@ -20,13 +20,12 @@ class RecipeList extends StatelessWidget {
       stream: recipesStream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loading();
-        return ListView.separated(
+        return ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) => RecipeTile(
             recipe: Recipe.fromJson(snapshot.data.documents[index].data),
             documentReference: snapshot.data.documents[index].reference
           ),
-          separatorBuilder: (context, index) => Divider(thickness: 1.0,),
         );
       },
     );

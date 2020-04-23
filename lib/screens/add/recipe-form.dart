@@ -57,7 +57,7 @@ class _RecipeFormState extends State<RecipeForm> {
         aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
         compressQuality: 50,
         androidUiSettings: AndroidUiSettings(
-          toolbarColor: Colors.blue,
+          toolbarColor: Colors.blue[800],
           toolbarTitle: 'Edit image',
           toolbarWidgetColor: Colors.white
         )

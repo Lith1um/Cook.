@@ -22,7 +22,7 @@ class Tags extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
           decoration: BoxDecoration(
             borderRadius: new BorderRadius.circular(20.0),
-            color: Colors.blue
+            color: Colors.blue[800]
           ),
           child: Text(
             tag,
