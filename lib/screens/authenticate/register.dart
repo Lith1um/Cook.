@@ -26,8 +26,8 @@ class _RegisterState extends State<Register> {
   String _registerError = '';
   bool _loading = false;
 
-  Future<void> _accountCreated() async {
-    return showDialog<void>(
+  _accountCreated() async {
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {

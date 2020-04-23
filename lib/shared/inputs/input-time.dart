@@ -23,22 +23,28 @@ class InputTime extends StatefulWidget {
   final String requiredMessage;
 
   const InputTime({
+    Key key,
     @required this.label,
     @required this.onValueChanged,
     this.isRequired = false,
     this.requiredMessage = 'This field is required',
-  });
+  }) : super(key: key);
 
   @override
-  _InputTimeState createState() => _InputTimeState();
+  InputTimeState createState() => InputTimeState();
 }
 
-class _InputTimeState extends State<InputTime> {
+class InputTimeState extends State<InputTime> {
   final _controller = TextEditingController();
   List<TimeOption> _options = TimeOption.getTimeOptions();
   List<DropdownMenuItem<TimeOption>> _dropdownMenuItems;
   TimeOption _selectedOption;
   int _timeInMinutes = 0;
+
+  void reset() {
+    _controller.text = '';
+    onDropdownItemChanged(_dropdownMenuItems[0].value);
+  }
 
   @override
   void initState() {

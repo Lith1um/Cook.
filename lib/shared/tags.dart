@@ -8,6 +8,8 @@ class Tags extends StatelessWidget {
   Tags({@required this.tagsText, this.size = 14.0});
 
   List<Widget> getTags() {
+    if (tagsText == null) return [];
+
     List<String> tagTextList = tagsText.split(',')
       .where((tag) => tag.trim() != '')
       .map((tag) => tag.trim()).toList();

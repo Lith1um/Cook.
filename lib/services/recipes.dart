@@ -5,12 +5,15 @@ class RecipesService {
 
   final CollectionReference _recipeCollection = Firestore.instance.collection('recipes');
 
-  Stream getAllRecipes([String orderBy = 'timeAdded']) {
-    return _recipeCollection.orderBy(orderBy).snapshots();
+  Stream getAllRecipes([String orderBy = 'timeAdded', bool descending = true]) {
+    return _recipeCollection.orderBy(orderBy, descending: descending)
+      .snapshots();
   }
 
-  Stream getRecipesForUser(String uid, [String orderBy = 'timeAdded']) {
-    return _recipeCollection.where('creator', isEqualTo: uid).orderBy(orderBy).snapshots();
+  Stream getRecipesForUser(String uid, [String orderBy = 'timeAdded', bool descending = true]) {
+    return _recipeCollection.where('creator', isEqualTo: uid)
+      .orderBy(orderBy, descending: descending)
+      .snapshots();
   }
 
 }

@@ -32,10 +32,20 @@ class _RecipeFormState extends State<RecipeForm> {
 
   File _imageFile;
   bool _showImageError = false;
+
+  final _ingredientsKey = GlobalKey<InputListState>();
   List<String> _ingredients;
+
+  final _stepsKey = GlobalKey<InputListState>();
   List<String> _steps;
+
+  final _prepTimeKey = GlobalKey<InputTimeState>();
   int _prepTime;
+
+  final _cookTimeKey = GlobalKey<InputTimeState>();
   int _cookTime;
+
+  final _tagsKey = GlobalKey<InputTagsState>();
   String _tags;
 
   Future<void> _pickImage(ImageSource source) async {
@@ -64,6 +74,18 @@ class _RecipeFormState extends State<RecipeForm> {
     setState(() => _imageFile = null);
   }
 
+  void _resetForm() {
+    setState(() {
+      _recipeNameController.text = '';
+      _imageFile = null;
+      _ingredientsKey.currentState.reset();
+      _stepsKey.currentState.reset();
+      _prepTimeKey.currentState.reset();
+      _cookTimeKey.currentState.reset();
+      _tagsKey.currentState.reset();
+    });
+  }
+
   bool validateForm() {
     bool valid = true;
 
@@ -77,6 +99,9 @@ class _RecipeFormState extends State<RecipeForm> {
   }
 
   void _uploadRecipe(BuildContext context) async {
+    // Display dialog
+    _showLoadingDialog(context);
+
     User currentUser = await _auth.getCurrentUser();
     String imageUrl = await uploadRecipePhoto(_imageFile);
     String recipeName = _recipeNameController.text;
@@ -94,7 +119,25 @@ class _RecipeFormState extends State<RecipeForm> {
     );
     await addNewRecipe(recipe);
 
+    _resetForm();
     Navigator.of(context).pop();
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => AlertDialog(
+        content: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 18.0),
+            Expanded(child: Text('Uploading recipe...'))
+          ]
+        ),
+      )
+    );
   }
 
   @override
@@ -214,48 +257,52 @@ class _RecipeFormState extends State<RecipeForm> {
                       ),
                     ),
                     InputTime(
+                      key: _prepTimeKey,
                       label: 'Preparation time',
                       onValueChanged: (int minutes) =>
                         setState(() => _prepTime = minutes),
                     ),
                     InputTime(
+                      key: _cookTimeKey,
                       label: 'Cooking time',
                       onValueChanged: (int minutes) =>
                         setState(() => _cookTime = minutes),
                     ),
                     InputList(
+                      key: _ingredientsKey,
                       label: 'Ingredients',
                       onValueChanged: (List<String> list) =>
                         setState(() => _ingredients = list)
                     ),
                     InputList(
+                      key: _stepsKey,
                       label: 'Steps',
                       numberedList: true,
                       onValueChanged: (List<String> list) =>
                         setState(() => _steps = list)
                     ),
                     InputTags(
+                      key: _tagsKey,
                       label: 'Tags',
                       onValueChanged: (String tags) =>
                         setState(() => _tags = tags),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Center(
-                        child: RaisedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, or false otherwise
-                            if (validateForm()) {
-                              // close keyboard if validated
-                              FocusScope.of(context).unfocus();
-                              // form is valid so start upload
-                              _uploadRecipe(context);
-                            }
-                          },
-                          child: Text('Upload'),
-                        ),
+                    SizedBox(height: 20.0),
+                    Center(
+                      child: RaisedButton(
+                        onPressed: () {
+                          // close keyboard
+                          FocusScope.of(context).unfocus();
+                          // Validate returns true if the form is valid, or false otherwise
+                          if (validateForm()) {
+                            // form is valid so start upload
+                            _uploadRecipe(context);
+                          }
+                        },
+                        child: Text('Upload'),
                       ),
                     ),
+                    SizedBox(height: 40.0),
                   ]
                 ),
               ),

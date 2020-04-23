@@ -8,18 +8,23 @@ class InputTags extends StatefulWidget {
   final String label;
   final Function onValueChanged;
 
-  InputTags({@required this.label, @required this.onValueChanged});
+  InputTags({Key key, @required this.label, @required this.onValueChanged}) : super(key: key);
 
   @override
-  _InputTagsState createState() => _InputTagsState();
+  InputTagsState createState() => InputTagsState();
 }
 
-class _InputTagsState extends State<InputTags> {
+class InputTagsState extends State<InputTags> {
   final _controller = TextEditingController();
-  String _tagsText = '';
+  String _tagsText;
+
+  void reset() {
+    _controller.text = '';
+    onTagFieldChanged(null);
+  }
 
   void onTagFieldChanged(String value) {
-    _tagsText = value;
+    setState(() => _tagsText = value);
     widget.onValueChanged(value);
   }
 

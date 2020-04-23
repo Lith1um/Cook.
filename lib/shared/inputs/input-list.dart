@@ -8,19 +8,26 @@ class InputList extends StatefulWidget {
   final Function onValueChanged;
 
   InputList({
+    Key key,
     @required this.label,
     this.numberedList = false,
     @required this.onValueChanged
-  });
+  }) : super(key: key);
   
   @override
-  _InputListState createState() => _InputListState();
+  InputListState createState() => InputListState();
 }
 
-class _InputListState extends State<InputList> {
+class InputListState extends State<InputList> {
   
   final _controller = TextEditingController();
   List<String> _textList = [];
+
+  void reset() {
+    setState(() => _textList = []);
+    widget.onValueChanged(_textList);
+    _controller.text = '';
+  }
 
   void onAddButtonPressed() {
     if (_controller.text.length > 0) {
@@ -51,8 +58,10 @@ class _InputListState extends State<InputList> {
                 fontSize: 16.0
               ),
               numberedList: widget.numberedList,
-              onDelete: (int index) => 
-                setState(() => _textList.removeAt(index)),
+              onDelete: (int index) {
+                setState(() => _textList.removeAt(index));
+                widget.onValueChanged(_textList);
+              }
             ),
           Row(
             children: <Widget>[

@@ -2,22 +2,6 @@
 
 A community driven recipe book for sharing recipes and helping people to expand their skills.
 
-##### Features to build (in no particular order)
-
-- ability to add recipes:
-  - name
-  - ingredients
-  - cook time
-  - instructions
-  - photo
-  - tags
-  - reviews?
-
-- build shopping list by selecting multiple recipes
-  - tick list to confirm items bought
-
-- offline content?
-
 
 ##### To-Dos
 
@@ -34,4 +18,16 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - allow users to 'favourite' recipes
 - build own recipes page
   - tabs for own recipes and favourited ones
+
+
+##### Bugs
+
+- flicker of logged out views when first loading a page using the provider
+
+
+##### Nice to have
+
 - create reuseable tabs widget
+- offline content?
+- build shopping list by selecting multiple recipes
+  - tick list to confirm items bought
