@@ -42,7 +42,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs.elementAt(_tabIndex),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: ResizeImage(
+              AssetImage('assets/images/main-backdrop.png'),
+              height: 200,
+              width: 200
+            ),
+            repeat: ImageRepeat.repeat
+          )
+        ),
+        child: _tabs.elementAt(_tabIndex)
+      ),
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
           barBackgroundColor: Colors.white,
