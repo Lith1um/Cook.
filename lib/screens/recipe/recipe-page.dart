@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 // Services
 import 'package:cook/services/recipes.dart';
-import 'package:cook/services/auth.dart';
 
 // Widgets
 import 'package:cook/shared/tags.dart';

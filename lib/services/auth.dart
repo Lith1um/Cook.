@@ -27,7 +27,9 @@ class AuthService {
   // transforms the firebase user into our custom user
   StreamTransformer _userStreamTransformer() => StreamTransformer<FirebaseUser, User>.fromHandlers(
     handleData: (user, sink) async {
-      if (user != null) {
+      if (user == null) {
+        sink.add(null);
+      } else {
         User customUser = await UserService(uid: user.uid).getUser();
         sink.add(customUser);
       }

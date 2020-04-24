@@ -15,10 +15,8 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - user profile linked to firebase user
   - display name
   - avatar
-- allow users to 'favourite' recipes
 
 - fields to add:
-  - description
   - difficulty
   - servings count
 
@@ -26,7 +24,7 @@ A community driven recipe book for sharing recipes and helping people to expand 
 ##### Bugs
 
 - flicker of logged out views when first loading a page using the provider
-
+- User only updates when firebase auth changes
 
 ##### Nice to have
 
