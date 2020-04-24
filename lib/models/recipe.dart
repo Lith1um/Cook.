@@ -11,6 +11,7 @@ class Recipe {
   final double reviewScore;
   final int timeAdded;
   final String creator;
+  final List<dynamic> favourites;
 
   Recipe({
     this.name,
@@ -24,7 +25,8 @@ class Recipe {
     this.reviews = 0,
     this.reviewScore = 0.0,
     this.timeAdded,
-    this.creator
+    this.creator,
+    this.favourites
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -40,7 +42,8 @@ class Recipe {
       reviews: json['reviews'],
       reviewScore: json['reviewScore'],
       timeAdded: json['timeAdded'],
-      creator: json['creator']
+      creator: json['creator'],
+      favourites: json['favourites']
     );
   }
 
@@ -56,6 +59,7 @@ class Recipe {
     'reviews' : reviews,
     'reviewScore' : reviewScore,
     'timeAdded' : timeAdded,
-    'creator' : creator
+    'creator' : creator,
+    'favourites' : favourites
   };
 }

@@ -1,4 +1,6 @@
 // Libs
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 // Services
@@ -22,10 +24,20 @@ class AuthService {
       : null;
   }
 
+  // transforms the firebase user into our custom user
+  StreamTransformer _userStreamTransformer() => StreamTransformer<FirebaseUser, User>.fromHandlers(
+    handleData: (user, sink) async {
+      if (user != null) {
+        User customUser = await UserService(uid: user.uid).getUser();
+        sink.add(customUser);
+      }
+    }
+  );
+
   // auth change user stream
   Stream<User> get user {
     return _auth.onAuthStateChanged
-      .map(_userFromFirebaseUser);
+      .transform(_userStreamTransformer());
   }
 
   Future<User> getCurrentUser() async {

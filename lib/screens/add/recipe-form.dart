@@ -6,8 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 // Services
 import 'package:cook/services/auth.dart';
-import 'package:cook/services/recipe-upload.dart';
-import 'package:cook/services/recipe-picture-upload.dart';
+import 'package:cook/services/recipes.dart';
 
 // Widgets
 import 'package:cook/shared/inputs/input-list.dart';
@@ -26,6 +25,7 @@ class RecipeForm extends StatefulWidget {
 class _RecipeFormState extends State<RecipeForm> {
 
   final AuthService _auth = AuthService();
+  final RecipesService _recipesService = RecipesService();
 
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
@@ -105,7 +105,7 @@ class _RecipeFormState extends State<RecipeForm> {
     _showLoadingDialog(context);
 
     User currentUser = await _auth.getCurrentUser();
-    String imageUrl = await uploadRecipePhoto(_imageFile);
+    String imageUrl = await _recipesService.uploadRecipePhoto(_imageFile);
     String recipeName = _recipeNameController.text;
     String description = _recipeDescriptionController.text;
 
@@ -119,9 +119,10 @@ class _RecipeFormState extends State<RecipeForm> {
       cookTime: _cookTime,
       tags: _tags,
       timeAdded: DateTime.now().millisecondsSinceEpoch,
-      creator: currentUser.uid
+      creator: currentUser.uid,
+      favourites: []
     );
-    await addNewRecipe(recipe);
+    await _recipesService.addNewRecipe(recipe);
 
     // reset form and close dialog
     _resetForm();

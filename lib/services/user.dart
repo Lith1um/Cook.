@@ -1,6 +1,9 @@
 // Libs
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Models
+import 'package:cook/models/user.dart';
+
 class UserService {
 
   final String uid;
@@ -10,14 +13,16 @@ class UserService {
 
   Future createUserData(String email, String displayName) async {
     return await _userCollection.document(uid).setData({
+      'uid': uid,
       'email': email,
-      'displayName': displayName
+      'displayName': displayName,
+      'isVerified': false
     });
   }
 
-  Future<Map<String, dynamic>> getUser(String uid) async {
-    var userDoc = await _userCollection.document(uid).get();
-    return userDoc.data;
+  Future<User> getUser() async {
+    DocumentSnapshot doc = await _userCollection.document(uid).get();
+    return User.fromJson(doc.data);
   }
 
 }

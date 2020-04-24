@@ -1,6 +1,7 @@
 // Libs
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 // Screens
@@ -11,6 +12,7 @@ import 'package:cook/shared/ink-wrapper.dart';
 import 'package:cook/shared/reviews-stars.dart';
 
 // Models
+import 'package:cook/models/user.dart';
 import 'package:cook/models/recipe.dart';
 
 class RecipeTile extends StatelessWidget {
@@ -21,13 +23,17 @@ class RecipeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final User user = Provider.of<User>(context);
+
     return InkWrapper(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RecipePage(
             recipe: recipe,
-            documentReference: documentReference
+            documentReference: documentReference,
+            user: user
           ))
         );
       },

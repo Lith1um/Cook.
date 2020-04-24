@@ -1,31 +1,36 @@
 // Libs
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cook/shared/tags.dart';
 import 'package:flutter/material.dart';
 
 // Services
-import 'package:cook/services/recipe-delete.dart';
+import 'package:cook/services/recipes.dart';
+import 'package:cook/services/auth.dart';
 
 // Widgets
+import 'package:cook/shared/tags.dart';
 import 'package:cook/shared/ink-wrapper.dart';
 import 'package:cook/shared/reviews-stars.dart';
 import 'package:cook/screens/recipe/item-list.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
+import 'package:cook/models/user.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
   final DocumentReference documentReference;
+  final User user;
 
-  RecipePage({@required this.recipe, @required this.documentReference});
+  RecipePage({@required this.recipe, @required this.documentReference, @required this.user});
 
   @override
   _RecipePageState createState() => _RecipePageState();
 }
 
 class _RecipePageState extends State<RecipePage> {
+  final RecipesService _recipesService = RecipesService();
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<String> _menuOptions = [
@@ -33,10 +38,19 @@ class _RecipePageState extends State<RecipePage> {
     'Delete'
   ];
 
-  bool _favourite = false;
+  bool _favourite;
 
-  void setFavourite() {
-    print('setFavourite');
+  @override
+  void initState() {
+    _favourite = widget.user != null ? widget.recipe.favourites.contains(widget.user.uid)
+      : false;
+    super.initState();
+  }
+
+  void setFavourite() async {
+    _favourite ? await _recipesService.removeFavourite(widget.documentReference, widget.user.uid)
+      : await _recipesService.addFavourite(widget.documentReference, widget.user.uid);
+
     setState(() => _favourite = !_favourite);
 
     final snackBar = SnackBar(
@@ -74,7 +88,7 @@ class _RecipePageState extends State<RecipePage> {
                 ),
               ),
               onPressed: () async {
-                await deleteRecipe(widget.documentReference);
+                await _recipesService.deleteRecipe(widget.documentReference);
                 Navigator.of(context).popUntil((route) => route.isFirst);
               }
             )
@@ -226,33 +240,34 @@ class _RecipePageState extends State<RecipePage> {
                 onTap: () => Navigator.of(context).pop(),
               ),
             ),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    InkWrapper(
-                      borderRadius: BorderRadius.circular(60.0),
-                      child: Container(
-                        height: 60.0,
-                        width: 60.0,
-                        child: IconButton(
-                          icon: Icon(
-                            _favourite ? Icons.favorite : Icons.favorite_border,
-                            color: _favourite ? Colors.red[600] : Colors.white
+            if (widget.user != null)
+              SafeArea(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      InkWrapper(
+                        borderRadius: BorderRadius.circular(60.0),
+                        child: Container(
+                          height: 60.0,
+                          width: 60.0,
+                          child: IconButton(
+                            icon: Icon(
+                              _favourite ? Icons.favorite : Icons.favorite_border,
+                              color: _favourite ? Colors.red[600] : Colors.white
+                            ),
+                            iconSize: 28.0,
+                            color: Colors.white,
+                            onPressed: () {}
                           ),
-                          iconSize: 28.0,
-                          color: Colors.white,
-                          onPressed: () {}
                         ),
-                      ),
-                      onTap: setFavourite,
-                    )
-                  ]
+                        onTap: setFavourite,
+                      )
+                    ]
+                  )
                 )
-              )
-            ),
+              ),
           ]
         ),
       )
