@@ -9,7 +9,9 @@ import 'package:cook/services/recipes.dart';
 // Widgets
 import 'package:cook/shared/tags.dart';
 import 'package:cook/shared/ink-wrapper.dart';
-import 'package:cook/shared/reviews-stars.dart';
+import 'package:cook/shared/favourites-badge.dart';
+import 'package:cook/shared/difficulty-badge.dart';
+import 'package:cook/shared/time-badge.dart';
 import 'package:cook/screens/recipe/item-list.dart';
 
 // Models
@@ -31,11 +33,6 @@ class _RecipePageState extends State<RecipePage> {
   final RecipesService _recipesService = RecipesService();
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final List<String> _menuOptions = [
-    'Edit',
-    'Delete'
-  ];
 
   bool _favourite;
 
@@ -132,7 +129,7 @@ class _RecipePageState extends State<RecipePage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 22.0
+                              fontSize: 20.0
                             ),
                           ),
                         )
@@ -162,20 +159,9 @@ class _RecipePageState extends State<RecipePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.timer, color: Colors.blue[800],),
-                            SizedBox(width: 5.0),
-                            Text('${widget.recipe.prepTime + widget.recipe.cookTime} mins'),
-                          ]
-                        )
-                      ),
-                      ReviewStars(
-                        reviews: widget.recipe.reviews,
-                        score: widget.recipe.reviewScore,
-                        size: 16.0,
-                      )
+                      TimeBadge(time: widget.recipe.prepTime + widget.recipe.cookTime),
+                      DifficultyBadge(difficulty: widget.recipe.difficulty),
+                      FavouritesBadge(favourites: widget.recipe.favourites.length)
                     ]
                   ),
                 ),
@@ -193,7 +179,7 @@ class _RecipePageState extends State<RecipePage> {
                         'Ingredients',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 22.0
+                          fontSize: 18.0
                         )
                       ),
                       SizedBox(height: 10.0),
@@ -203,7 +189,7 @@ class _RecipePageState extends State<RecipePage> {
                         'Steps',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 22.0
+                          fontSize: 18.0
                         )
                       ),
                       SizedBox(height: 10.0),
@@ -213,7 +199,7 @@ class _RecipePageState extends State<RecipePage> {
                         'Tags',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20.0
+                          fontSize: 18.0
                         )
                       ),
                       SizedBox(height: 10.0),

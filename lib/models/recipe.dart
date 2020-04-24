@@ -2,6 +2,7 @@ class Recipe {
   final String name;
   final String description;
   final String imageUrl;
+  final String difficulty;
   final List<dynamic> ingredients;
   final List<dynamic> steps;
   final int prepTime;
@@ -17,6 +18,7 @@ class Recipe {
     this.name,
     this.description,
     this.imageUrl,
+    this.difficulty,
     this.ingredients,
     this.steps,
     this.prepTime,
@@ -34,6 +36,7 @@ class Recipe {
       name: json['name'],
       description: json['description'],
       imageUrl: json['imageUrl'],
+      difficulty: json['difficulty'],
       ingredients: json['ingredients'],
       steps: json['steps'],
       prepTime: json['prepTime'],
@@ -51,6 +54,7 @@ class Recipe {
     'name' : name,
     'description' : description,
     'imageUrl' : imageUrl,
+    'difficulty' : difficulty,
     'ingredients' : ingredients,
     'steps' : steps,
     'prepTime' : prepTime,

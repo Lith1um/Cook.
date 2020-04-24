@@ -12,7 +12,7 @@ class ItemList extends StatelessWidget {
     {
       this.numberedList = false,
       this.spacing = 10.0,
-      this.size = 18.0
+      this.size = 16.0
     }
   );
 
@@ -53,10 +53,10 @@ class ItemList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               getPoint(index),
-              SizedBox(width: 20.0),
+              SizedBox(width: 15.0),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 5.0),
+                  padding: EdgeInsets.only(top: 6.0),
                   child: Text(
                     '${itemList[index].toString()}',
                     style: TextStyle(fontSize: size)

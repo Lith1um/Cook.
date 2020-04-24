@@ -12,6 +12,7 @@ import 'package:cook/services/recipes.dart';
 import 'package:cook/shared/inputs/input-list.dart';
 import 'package:cook/shared/inputs/input-tags.dart';
 import 'package:cook/shared/inputs/input-time.dart';
+import 'package:cook/shared/inputs/input-select.dart';
 
 // Models
 import 'package:cook/models/recipe.dart';
@@ -33,6 +34,9 @@ class _RecipeFormState extends State<RecipeForm> {
 
   File _imageFile;
   bool _showImageError = false;
+
+  final _difficultyKey = GlobalKey<InputSelectState>();
+  String _difficulty;
 
   final _ingredientsKey = GlobalKey<InputListState>();
   List<String> _ingredients;
@@ -80,6 +84,7 @@ class _RecipeFormState extends State<RecipeForm> {
       _recipeNameController.text = '';
       _recipeDescriptionController.text = '';
       _imageFile = null;
+      _difficultyKey.currentState.reset();
       _ingredientsKey.currentState.reset();
       _stepsKey.currentState.reset();
       _prepTimeKey.currentState.reset();
@@ -113,6 +118,7 @@ class _RecipeFormState extends State<RecipeForm> {
       name: recipeName,
       description: description,
       imageUrl: imageUrl,
+      difficulty: _difficulty,
       ingredients: _ingredients,
       steps: _steps,
       prepTime: _prepTime,
@@ -299,6 +305,16 @@ class _RecipeFormState extends State<RecipeForm> {
                       label: 'Cooking time',
                       onValueChanged: (int minutes) =>
                         setState(() => _cookTime = minutes),
+                    ),
+                    InputSelect(
+                      label: 'How difficult is this recipe',
+                      options: [
+                        SelectOption('Easy', 'Easy'),
+                        SelectOption('Medium', 'Medium'),
+                        SelectOption('Hard', 'Hard'),
+                      ],
+                      onValueChanged: (String difficulty) =>
+                        setState(() => _difficulty = difficulty),
                     ),
                     InputList(
                       key: _ingredientsKey,

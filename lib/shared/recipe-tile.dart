@@ -9,7 +9,9 @@ import 'package:cook/screens/recipe/recipe-page.dart';
 
 // Widgets
 import 'package:cook/shared/ink-wrapper.dart';
-import 'package:cook/shared/reviews-stars.dart';
+import 'package:cook/shared/favourites-badge.dart';
+import 'package:cook/shared/difficulty-badge.dart';
+import 'package:cook/shared/time-badge.dart';
 
 // Models
 import 'package:cook/models/user.dart';
@@ -38,7 +40,7 @@ class RecipeTile extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
         child: Column(
           children: <Widget>[
             Stack(
@@ -68,7 +70,7 @@ class RecipeTile extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30.0),
+                      margin: EdgeInsets.symmetric(horizontal: 50.0),
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -91,7 +93,7 @@ class RecipeTile extends StatelessWidget {
               ]
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 30.0),
+              margin: EdgeInsets.symmetric(horizontal: 50.0),
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -112,19 +114,9 @@ class RecipeTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.timer, color: Colors.blue[800],),
-                        SizedBox(width: 5.0),
-                        Text('${recipe.prepTime + recipe.cookTime} mins'),
-                      ]
-                    )
-                  ),
-                  ReviewStars(
-                    score: recipe.reviewScore,
-                    size: 14.0,
-                  )
+                  TimeBadge(time: recipe.prepTime + recipe.cookTime),
+                  DifficultyBadge(difficulty: recipe.difficulty),
+                  FavouritesBadge(favourites: recipe.favourites.length)
                 ]
               ),
             ),
