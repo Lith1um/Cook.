@@ -45,11 +45,7 @@ class _HomeState extends State<Home> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: ResizeImage(
-              AssetImage('assets/images/main-backdrop.png'),
-              height: 200,
-              width: 200
-            ),
+            image: AssetImage('assets/images/main-backdrop.png'),
             repeat: ImageRepeat.repeat
           )
         ),
