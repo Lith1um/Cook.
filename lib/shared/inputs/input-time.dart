@@ -84,8 +84,9 @@ class InputTimeState extends State<InputTime> {
   
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      color: Colors.white,
       child: Row(
         children: <Widget>[
           Expanded(

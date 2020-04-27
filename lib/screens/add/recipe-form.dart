@@ -165,98 +165,105 @@ class _RecipeFormState extends State<RecipeForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
               child: Text(
                 'Upload a new recipe',
                 style: TextStyle(fontSize: 24.0),
               )
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Pick a picture for your recipe:',
-                    style: TextStyle(
-                      fontSize: 16.0
+              padding: EdgeInsets.symmetric(horizontal: 30.0),
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Pick a picture for your recipe:',
+                      style: TextStyle(
+                        fontSize: 16.0
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20.0),
-                  if (_imageFile != null)
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 150.0,
-                          child: Image.file(_imageFile, fit: BoxFit.fitWidth),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: FlatButton(
-                              textColor: Colors.red,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.delete),
-                                    Text('Delete')
-                                  ],
+                    SizedBox(height: 20.0),
+                    if (_imageFile != null)
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            width: 150.0,
+                            child: Image.file(_imageFile, fit: BoxFit.fitWidth),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: FlatButton(
+                                textColor: Colors.red,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.delete),
+                                      Text('Delete')
+                                    ],
+                                  ),
                                 ),
+                                onPressed: () => _clear(),
+                              )
+                            ),
+                          )
+                        ]
+                      ),
+                    if (_imageFile == null) ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          FlatButton(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.photo_camera),
+                                  Text('Camera')
+                                ],
                               ),
-                              onPressed: () => _clear(),
+                            ),
+                            onPressed: () => _pickImage(ImageSource.camera),
+                          ),
+                          FlatButton(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.photo_library),
+                                  Text('Gallery')
+                                ],
+                              ),
+                            ),
+                            onPressed: () => _pickImage(ImageSource.gallery),
+                          ),
+                        ],
+                      ),
+                      if (_showImageError) ...[
+                        SizedBox(height: 10.0),
+                        Center(
+                          child: Text(
+                            'Please select an image',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 12.0
                             )
-                          ),
-                        )
-                      ]
-                    ),
-                  if (_imageFile == null) ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.photo_camera),
-                                Text('Camera')
-                              ],
-                            ),
-                          ),
-                          onPressed: () => _pickImage(ImageSource.camera),
-                        ),
-                        FlatButton(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.photo_library),
-                                Text('Gallery')
-                              ],
-                            ),
-                          ),
-                          onPressed: () => _pickImage(ImageSource.gallery),
-                        ),
-                      ],
-                    ),
-                    if (_showImageError) ...[
-                      SizedBox(height: 10.0),
-                      Center(
-                        child: Text(
-                          'Please select an image',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 12.0
                           )
                         )
-                      )
+                      ]
                     ]
                   ]
-                ]
+                )
               )
             ),
             Form(
@@ -266,8 +273,9 @@ class _RecipeFormState extends State<RecipeForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                    Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: _recipeNameController,
                         maxLines: null,
@@ -283,8 +291,9 @@ class _RecipeFormState extends State<RecipeForm> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                    Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: _recipeDescriptionController,
                         maxLines: null,

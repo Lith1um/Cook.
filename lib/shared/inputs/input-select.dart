@@ -71,8 +71,9 @@ class InputSelectState extends State<InputSelect> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -18,27 +18,33 @@ class Profile extends StatelessWidget {
     final User user = Provider.of<User>(context);
 
     return SafeArea(
-      child: Column(
-        children: [
-          if (!user.isVerified)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Account is not verified'),
-                RaisedButton(
-                  onPressed: () => _auth.verifyEmailAddress(),
-                  child: Text('resend email')
-                )
-              ]
-            ),
-          FlatButton.icon(
-            icon: Icon(Icons.exit_to_app),
-            label: Text('logout'),
-            onPressed: () async {
-              await _auth.signOut();
-            }
+      child: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              if (!user.isVerified)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Account is not verified'),
+                    RaisedButton(
+                      onPressed: () => _auth.verifyEmailAddress(),
+                      child: Text('resend email')
+                    )
+                  ]
+                ),
+              FlatButton.icon(
+                icon: Icon(Icons.exit_to_app),
+                label: Text('logout'),
+                onPressed: () async {
+                  await _auth.signOut();
+                }
+              )
+            ]
           )
-        ]
+        )
       )
     );
   }

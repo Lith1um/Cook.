@@ -43,9 +43,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: ExactAssetImage('assets/images/main-backdrop.png', scale: 5.0),
+            alignment: Alignment.topLeft,
             repeat: ImageRepeat.repeat
           )
         ),
