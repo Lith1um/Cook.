@@ -26,7 +26,10 @@ class _HomeState extends State<Home> {
 
   int _tabIndex = 0;
   List<Widget> _tabs = <Widget>[
-    RecipeList(recipesStream: _recipesService.getAllRecipes()),
+    RecipeList(
+      recipesStream: _recipesService.getAllRecipes(),
+      title: 'Browse',
+    ),
     MemberFeature(
       content: RecipeBook()
     ),

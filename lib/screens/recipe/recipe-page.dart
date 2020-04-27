@@ -205,16 +205,18 @@ class _RecipePageState extends State<RecipePage> {
                         ),
                         SizedBox(height: 10.0),
                         ItemList(widget.recipe.steps, numberedList: true),
-                        SizedBox(height: 20.0),
-                        Text(
-                          'Tags',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0
-                          )
-                        ),
-                        SizedBox(height: 10.0),
-                        Tags(tagsText: widget.recipe.tags, size: 16.0,),
+                        if (widget.recipe.tags != null) ...[
+                          SizedBox(height: 20.0),
+                          Text(
+                            'Tags',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0
+                            )
+                          ),
+                          SizedBox(height: 10.0),
+                          Tags(tagsText: widget.recipe.tags, size: 16.0,),
+                        ]
                       ]
                     )
                   )

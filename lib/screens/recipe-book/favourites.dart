@@ -21,6 +21,7 @@ class Favourites extends StatelessWidget {
 
     return RecipeList(
       recipesStream: _recipesService.getFavouritesForUser(user.uid),
+      title: 'Favourites',
       noResultsIcon: Icons.favorite_border,
       noResultsTitle: 'There\'s nothing here...',
       noResultsMessage: 'You haven\'t added any recipes to your favourites yet, head over to the browse tab and save some tasty looking food!',

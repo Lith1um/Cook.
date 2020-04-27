@@ -22,6 +22,7 @@ class RecipeBook extends StatelessWidget {
 
     return RecipeList(
       recipesStream: _recipesService.getRecipesForUser(user.uid),
+      title: 'My Book',
       noResultsMessage: 'You haven\'t uploaded any of your own recipes to your favourites yet, head over to the add tab and let everyone know what you made!',
     );
   }
