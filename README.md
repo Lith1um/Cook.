@@ -2,7 +2,7 @@
 
 A community driven recipe book for sharing recipes and helping people to expand their skills.
 
-![app-screenshot-1](assets/images/screenshot-1.png)    ![app-screenshot-2](assets/images/screenshot-2.png)
+![app-screenshot-1](assets/screenshots/screenshot-1.png | width=250)    ![app-screenshot-2](assets/screenshots/screenshot-2.png | width=250)
 
 #### Download latest version of the app
 
