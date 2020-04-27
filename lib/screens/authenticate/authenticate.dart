@@ -38,75 +38,79 @@ class _AuthenticateState extends State<Authenticate> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 40.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 60.0,
-                  child: Image.asset('assets/images/logo.png', fit: BoxFit.fitWidth)
-                ),
-                SizedBox(width: 20.0),
-                Text(
-                  'Cook.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey[700],
-                    fontSize: 32.0
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.symmetric(horizontal: 30.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 40.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 60.0,
+                    child: Image.asset('assets/images/logo.png', fit: BoxFit.fitWidth)
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 40.0),
-            Padding(padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: Column(
-                children: [
+                  SizedBox(width: 20.0),
                   Text(
-                    'Cook is a free-to-use app that lets people share their creations with the world and inspire others to make something new. Click the browse tab to start searching food.',
-                    textAlign: TextAlign.justify,
+                    'Cook.',
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: Colors.blueGrey[700],
-                      fontSize: 14.0
-                    )
+                      fontSize: 32.0
+                    ),
                   ),
-                  SizedBox(height: 20.0),
-                  Text(
-                    'Alternatively, log in or sign up for access to all features including adding recipes, saving and reviewing other people\'s recipes and managing your own recipe book.',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      color: Colors.blueGrey[700]
-                    )
-                  ),
-                ]
+                ],
               ),
-            ),
-            SizedBox(height: 20.0),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 60.0),
-              child: TabBar(
-                labelPadding: EdgeInsets.all(15.0),
-                labelStyle: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
+              SizedBox(height: 40.0),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Cook is a free-to-use app that lets people share their creations with the world and inspire others to make something new. Click the browse tab to start searching food.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: Colors.blueGrey[700],
+                        fontSize: 14.0
+                      )
+                    ),
+                    SizedBox(height: 20.0),
+                    Text(
+                      'Alternatively, log in or sign up for access to all features including adding recipes, saving and reviewing other people\'s recipes and managing your own recipe book.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: Colors.blueGrey[700]
+                      )
+                    ),
+                  ]
                 ),
-                controller: _tabController,
-                indicatorColor: Colors.blue[800],
-                labelColor: Colors.blue[800],
-                tabs: _tabs
               ),
-            ),
-            Container(
-              height: 300.0,
-              padding: EdgeInsets.fromLTRB(60.0, 30.0, 60.0, 0.0),
-              child: TabBarView(
-                controller: _tabController,
-                physics: NeverScrollableScrollPhysics(),
-                children: _tabsContent,
+              SizedBox(height: 20.0),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                child: TabBar(
+                  labelPadding: EdgeInsets.all(15.0),
+                  labelStyle: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  controller: _tabController,
+                  indicatorColor: Colors.blue[800],
+                  labelColor: Colors.blue[800],
+                  tabs: _tabs
+                ),
+              ),
+              Container(
+                height: 300.0,
+                padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+                child: TabBarView(
+                  controller: _tabController,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: _tabsContent,
+                )
               )
-            )
-          ]
+            ]
+          )
         )
       )
     );
