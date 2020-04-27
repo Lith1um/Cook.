@@ -2,6 +2,13 @@
 
 A community driven recipe book for sharing recipes and helping people to expand their skills.
 
+![app-screenshot-1](assets/images/screenshot-1.png)    ![app-screenshot-2](assets/images/screenshot-2.png)
+
+#### Download latest version of the app
+
+- [Android](https://github.com/Lith1um/Cook./blob/master/release/android/Cook.apk)
+
+---
 
 ##### To-Dos
 
@@ -10,14 +17,12 @@ A community driven recipe book for sharing recipes and helping people to expand 
 - images aren't currently deleted when recipe is
 - verify email functionality
   - prevent profile changes until email is verified
-- search functionality for recipes
 - better firebase auth rules
 - user profile linked to firebase user
   - display name
   - avatar
 
 - fields to add:
-  - difficulty
   - servings count
 
 
